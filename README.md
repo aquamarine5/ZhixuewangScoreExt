@@ -1,2 +1,2 @@
-# ZhixuewangScoreExtensions
+# ZhixuewangScoreExtension
 用于在智学网成绩报告页面快速更改为满分的插件
