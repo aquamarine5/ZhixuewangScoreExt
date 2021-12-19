@@ -1,23 +1,81 @@
 console.log("Content-Scripts Load.")
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log("Receive message of the popup.")
-    execZhixuewangAction()
+    execZhixuewangAction(request)
 })
-var execZhixuewangAction=function(){
+var execZhixuewangAction = function(request){
     console.log("Start edit the score and the sign image.")
+    if(document.location.href.search("report-detail")!=-1){
+        var canvas=document.getElementsByClassName("subject_analysis")[0]
+        canvas.remove()
+        var analyse_div=document.getElementsByClassName("subject_analysis_div")[0]
+        var img=document.createElement("img");
+        img.setAttribute('src',request.image_url)
+        analyse_div.appendChild(img)
+        const scores=document.getElementsByClassName("guideWapper")
+        for (let index = 0; index < scores.length; index++) {
+            const element = scores[index];
+            var mask=element.getElementsByClassName("subject_analysis_mark_span")
+            if(mask.length==0){
+                /*
+                var parent=element.getElementsByClassName("subject_analysis_mark_bg_div_normal")[0]
+                parent.className="subject_analysis_mark_bg_div_mask"
+                var m=document.createElement("span")
+                m.setAttribute("class","subject_analysis_mark_span")
+                m.setAttribute("style","background:#06C1AE;")
+                m.textContent="很赞"
+                parent.appendChild(m)*/
+            }
+            else{
+                if(mask[0].textContent=="偏科"){
+                    mask[0].textContent=="很赞"
+                    mask[0].setAttribute("style","background:#06C1AE;")
+                }
+            }
+        }
+        var fullscore=document.getElementsByClassName("tspt_fullScore")[0].textContent.match(/(\d+\.?\d?)/)[0]
+        var totalscore=document.getElementsByClassName("tspt_score")[0]
+        totalscore.textContent=totalscore.textContent.replace(/(\d+\.?\d?)/,fullscore).replace("分","")
+        var text=document.createElement("em")
+        text.setAttribute("style","")
+        text.textContent="分"
+        totalscore.appendChild(text)
+        var scorelist=document.getElementsByClassName("tspt_sujectList")[0].getElementsByTagName("li")
+        for (let index = 0; index < scorelist.length; index++) {
+            const element = scorelist[index];
+            var fs=element.getElementsByTagName("i")[0].textContent.match(/(\d+)/)[0]
+            var ts=element.getElementsByClassName("tspt_subjectScore")[0]
+            ts.textContent=ts.textContent.replace(/(\d+\.?\d?)/,fs)
+            var mask=element.getElementsByClassName("grade-tips")
+            if(mask.length==0){
+                var parent=element.getElementsByClassName("tspt_subjectWrap")[0]
+                var m=document.createElement("span")
+                m.setAttribute("class","grade-tips")
+                m.setAttribute("style","background: rgb(6, 193, 174);")
+                m.textContent="很赞"
+                parent.appendChild(m)
+            }
+            else{
+                if(mask[0].textContent=="偏科"){
+                    mask[0].textContent=="很赞"
+                    mask[0].setAttribute("style","background: rgb(6, 193, 174);")
+                }
+            }
+        }
+    }
     if (document.location.href.search("original-roll-detail") != -1) {
-        let scoretext = document.getElementsByClassName("total-score-text").textContent;
+        let scoretext = document.getElementsByClassName("total-score-text")[0];
         const subject = document.getElementsByClassName("zx-tab-item tab-item current-tab");
         if (subject.length == 1) {
             let subjectname = subject[0].getElementsByTagName("span")[0].textContent;
-            if (subjectname == "语文" || subjectname == "数学" || subjectname == "英语") scoretext = "150";
-            else scoretext = "100";
+            if (subjectname == "语文" || subjectname == "数学" || subjectname == "英语") scoretext.textContent = "150";
+            else scoretext.textContent = "100";
         }
         const userscoreCollection = document.getElementsByClassName("user-score");
         for (let index = 0; index < userscoreCollection.length; index++) {
             const element = userscoreCollection[index];
-            const allscore = element.textContent.match(/(\d+)/g)[1];
-            element.textContent = element.textContent.replace(/(\d+)/, allscore);
+            const allscore = element.textContent.match(/(\d+\.?\d?)/g)[1];
+            element.textContent = element.textContent.replace(/(\d+\.?\d?)/, allscore);
         }
         const tickCollection = document.getElementsByClassName("topic-sign");
         for (let index = 0; index < tickCollection.length; index++) {
