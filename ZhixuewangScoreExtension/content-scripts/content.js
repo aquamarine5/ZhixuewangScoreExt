@@ -28,7 +28,7 @@ var execZhixuewangAction = function(request){
             }
             else{
                 if(mask[0].textContent=="偏科"){
-                    mask[0].textContent=="很赞"
+                    mask[0].textContent="很赞"
                     mask[0].setAttribute("style","background:#06C1AE;")
                 }
             }
@@ -57,7 +57,7 @@ var execZhixuewangAction = function(request){
             }
             else{
                 if(mask[0].textContent=="偏科"){
-                    mask[0].textContent=="很赞"
+                    mask[0].textContent="很赞"
                     mask[0].setAttribute("style","background: rgb(6, 193, 174);")
                 }
             }
