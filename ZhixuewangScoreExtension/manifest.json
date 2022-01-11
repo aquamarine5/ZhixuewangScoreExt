@@ -1,6 +1,6 @@
 {
   "name": "ZhixuewangScoreExtension",
-  "version": "1.1",
+  "version": "1.3",
   "manifest_version": 2,
   "description": "用于在智学网成绩报告页面快速更改为满分的插件",
   "icons": {
@@ -17,7 +17,7 @@
         "matches": [
           "https://www.zhixue.com/*"
         ],
-        "js": ["content-scripts/content.js"]
+        "js": ["libs/jquery-3.6.0.min.js","content-scripts/content.js"]
     }
   ],
   "web_accessible_resources": [
