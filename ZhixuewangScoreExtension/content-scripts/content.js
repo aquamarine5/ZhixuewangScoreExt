@@ -1,32 +1,47 @@
 console.log("Content-Scripts Load.")
-var image_url=""
-$(window).load(
-    function(){
-        function isReportDetailPageLoadedFinished(resolve) {
-            if ($(".subject_analysis")[0] != undefined &&
-                $(".general span.specific")[0] != undefined &&
-                $(".container-backgrounde[index='2'] .class-running")[0] != undefined) {
-                resolve()
-            }
-            else setTimeout(isReportDetailPageLoadedFinished,100,resolve)
-        }
-        const promise = new Promise(function (resolve, reject) {
-            setTimeout(isReportDetailPageLoadedFinished,100,resolve)
-        })
-        promise.then(function(data){
-            report_detail_v2({})
-        })
+if (window.realmode){
+    window.onload=function(){
+        const w=new WaitForLoading(
+            [".container-backgrounde[index='2']"
+        ])
     }
-)
+}
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log("Receive message of the popup.")
-    if(request.type=="RealModeStatusChanged"){
-        image_url=request.image_url
+    if (request.type == "RealModeStatusChanged") {
+        window.image_url = request.image_url
+        window.realmode = true
     }
-    else if(request.type=="FullMarkCallback"){
+    else if (request.type == "FullMarkCallback") {
         execZhixuewangAction(request)
     }
 })
+function single_report_detail(subject) {
+    function isSingleReportDetailPageLoadedFinished(resolve) {
+        if ($(".subject_analysis")[0] != undefined &&
+            $(".general span.specific")[0] != undefined &&
+            $(".container-backgrounde[index='2'] .class-running")[0] != undefined) {
+            resolve()
+        }
+        else setTimeout(isSingleReportDetailPageLoadedFinished, 100, resolve)
+    }
+    const promise = new Promise(function (resolve, reject) {
+        setTimeout(isSingleReportDetailPageLoadedFinished, 100, resolve)
+    })
+    promise.then(function (data) {
+        report_detail_v2({ image_url: window.image_url })
+    })
+}
+function single_report_detail_binding() {
+    if (document.location.href.search("report-detail") != -1) return;
+    var tablist = $(".zx-tab-list .zx-tab-item")
+    for (let index = 0; index < tablist.length; index++) {
+        const element = tablist[index];
+        window.nowSubject = element.getElementsByTagName("span")[1].textContent
+        element.getElementsByTagName("span")[0].onclick = single_report_detail
+    }
+}
 function original_roll_detail(request) {
     let scoretext = document.getElementsByClassName("total-score-text")[0];
     const subject = document.getElementsByClassName("zx-tab-item tab-item current-tab");
@@ -114,23 +129,55 @@ function report_detail_v1(request) {
 }
 
 function report_detail_v2(request) {
-    var fullscore = $(".general span.specific")[0].textContent.match(/(\d+\.?\d?)/g)[0];
-    var fullscore_position = $(".general span.increase")[0]
-    fullscore_position.textContent = fullscore_position.textContent.replace(/(\d+\.?\d?)/g, fullscore)
-    const subjectScore = $("div.single div.bottom")
-    console.log(subjectScore)
-    for (let index = 0; index < subjectScore.length; index++) {
-        const element = subjectScore[index];
-        element.getElementsByClassName("blue")[0].textContent = element.getElementsByClassName("specific")[0].textContent.match(/(\d+\.?\d?)/g)[0]
+    function change_full_score(){
+        // 单科成绩或全科总成绩
+        if($(".general span.specific")[0]!=undefined) var head=".general "
+        else var head=""
+        var fullscore = $(head+"span.specific")[0].textContent.match(/(\d+\.?\d?)/g)[0];
+        var fullscore_position = $(head+"span.increase")[0]
+        fullscore_position.textContent = fullscore_position.textContent.replace(/(\d+\.?\d?)/g, fullscore)
+        // 全科成绩的分成绩
+        const subjectScore = $("div.single div.sub-item")
+        for (let index = 0; index < subjectScore.length; index++) {
+            const element = subjectScore[index];
+            element.getElementsByClassName("blue")[0].textContent = element.getElementsByClassName("specific")[0].textContent.match(/(\d+\.?\d?)/g)[0]
+        }
     }
-    $(".container-backgrounde[index='2'] .class-score-level-selected-exam-name")[0].remove()
-    $(".container-backgrounde[index='2'] div[style='position: relative;']")[0].remove()
-    $(".container-backgrounde[index='2'] .class-running")[0].setAttribute("style", "left: 53.3%;")
-    $(".subject_analysis")[0].remove()
-    var img = document.createElement("img");
-    img.setAttribute('src', request.image_url)
-    $(".subject_analysis_div")[0].appendChild(img)
+    function edit_container_0(){}
+    function edit_container_2(){
+        $.tryRemove(".container-backgrounde[index='2'] .class-score-level-selected-exam-name",0)
+        $.tryRemove(".container-backgrounde[index='2'] div[style='position: relative;']",0)
+        $(".container-backgrounde[index='2'] .class-running")[0].setAttribute("style", "left: 50.8114514%;")
+    }
+    function edit_container_3(){
+        $.tryRemove($(".subject_analysis"),0)
+        var img = document.createElement("img");
+        img.setAttribute('src', request.image_url)
+        $(".subject_analysis_div")[0].appendChild(img)
+    }
+    function edit_container_5(){
+        $.tryRemove(".container-backgrounde[index='5'] .loss-analysis",0)
+        $.tryRemove(".container-backgrounde[index='5'] .loss-diagnosis",0)
+        $.tryRemove(".container-backgrounde[index='5'] .class-b-container",0)
+        $(".container-backgrounde[index='5'] .class-a-title-tips")[0].textContent="太棒了! 你竟然没有错题! "  // 编的
+    }
+    function edit_container_6(){
+        $.tryRemove(".container-backgrounde[index='6'] .index-pane",0)
+        $(".container-backgrounde[index='6'] .class-a-title-tips")[0].textContent="竟然没有错题! 继续复习吧"
+    }
+    const containers=$(".container-backgrounde")
+    const container_indexs=[
+        edit_container_0,edit_container_0,edit_container_2,
+        edit_container_3,edit_container_0,edit_container_5,
+        edit_container_6]
+    for (let index = 0; index < containers.length; index++) {
+        container_indexs[parseInt(containers[index].getAttribute("index"))]();
+    }
+    change_full_score()
 }
+
+
+
 function execZhixuewangAction(request) {
     if (document.location.href.search("report-detail") != -1) {
         report_detail_v2(request);
