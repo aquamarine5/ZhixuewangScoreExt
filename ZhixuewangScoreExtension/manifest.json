@@ -1,6 +1,6 @@
 {
-  "name": "ZhixuewangScoreExtension",
-  "version": "1.4",
+  "name": "ZhixuewangScoreExt",
+  "version": "1.5",
   "manifest_version": 2,
   "description": "用于在智学网成绩报告页面快速更改为满分的插件",
   "icons": {
@@ -13,7 +13,7 @@
     "tabs",
     "storage"
   ],
-  "devtools_page":"devtools/debtools.html",
+  "devtools_page":"devtools/devtools.html",
   "content_scripts": [
     {
         "matches": [

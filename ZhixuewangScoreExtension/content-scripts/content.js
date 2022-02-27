@@ -146,8 +146,21 @@ function report_detail_v2(request) {
     function edit_container_0(){}
     function edit_container_2(){
         $.tryRemove(".container-backgrounde[index='2'] .class-score-level-selected-exam-name",0)
-        $.tryRemove(".container-backgrounde[index='2'] div[style='position: relative;']",0)
+        $.tryRemove(".container-backgrounde[index='2'] canvas")
         $(".container-backgrounde[index='2'] .class-running")[0].setAttribute("style", "left: 50.8114514%;")
+        const levelpoints=$(".container-backgrounde[index='2'] .class-score-level-point-tag")
+        const levelpopup=$(".container-backgrounde[index='2'] .class-score-level-popup")
+        const levelwappers=$(".container-backgrounde[index='2'] .class-score-level-tag-container")
+        var img=document.createElement("img");
+        img.setAttribute("src",request.scoreRanks[parseInt(levelpoints.length-1)])
+        $(".container-backgrounde[index='2'] div[style='position: relative;']")[0].appendChild(img)
+        for (let index = 0; index < levelpoints.length; index++) {
+            const element = levelpoints[index];
+            element.setAttribute("style",element.getAttribute("style").replace(/top: \d+px/,"top: 40px"))
+            element.innerHTML=element.innerHTML.replace(/[A-D]等/,"A等")
+            levelwappers[index].setAttribute("style",levelwappers[index].getAttribute("style").replace(/top: \d+px/,"top: 29px"))
+            levelpopup[index].innerHTML=levelpopup[index].innerHTML.replace(/[A-D]等/,"A等")
+        }
     }
     function edit_container_3(){
         $.tryRemove($(".subject_analysis"),0)
