@@ -9,6 +9,14 @@
 ![Alt](https://repobeats.axiom.co/api/embed/55b0946e57e5680f4a865aeb6f1b25f7e55d600e.svg "Repobeats analytics image")  
 ## **如有不更改或新内容请提issues**
 用于在智学网成绩报告页面以及考试原卷页面快速更改为满分的插件
+## 如何使用？
+- 从[Releases](https://github.com/aquamarine5/ZhixuewangScoreExt/releases)处下载最新插件的zip包
+- 解压，打开[Edge](edge://extensions/)或[Chrome](chrome://extensions/)扩展页面（可通过链接直达）
+- 在右下角打开**开发人员模式**
+- 点击**加载解压缩的扩展**，选择解压后的文件夹根目录，点击确定
+- 刷新智学网网页，点击地址栏右侧的扩展图标即可使用
+## 免责声明
+<img src="README_images/klee_emoji.png" width="77" alt="rickroll">使用此插件带来的老师批评学生质疑等作者均不负责
 ## 效果实例
 ### 修改分数为满分
 > 修改前：
