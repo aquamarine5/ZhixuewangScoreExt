@@ -1,4 +1,4 @@
-# ZhixuewangScoreExt (ZhixuewangScoreExt)
+# ZhixuewangScoreExt (ZhixuewangScoreExtension)
 [![GitHub repo size](https://img.shields.io/github/repo-size/aquamarine5/ZhixuewangScoreExt)](https://github.com/aquamarine5/ZhixuewangScoreExt)
 [![Code lines](https://img.shields.io/tokei/lines/github/aquamarine5/ZhixuewangScoreExt)](https://github.com/aquamarine5/ZhixuewangScoreExt)
 [![Commit Activity](https://img.shields.io/github/commit-activity/m/aquamarine5/ZhixuewangScoreExt)]()
