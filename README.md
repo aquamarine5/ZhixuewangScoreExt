@@ -11,7 +11,7 @@
 用于在智学网成绩报告页面以及考试原卷页面快速更改为满分的插件
 ## 如何使用？
 - 从[Releases](https://github.com/aquamarine5/ZhixuewangScoreExt/releases)处下载最新插件的zip包
-- 解压，打开[Edge](edge://extensions/)或[Chrome](chrome://extensions/)扩展页面（可通过链接直达）
+- 解压，打开Edge ( edge://extensions/ ) 或Chrome ( chrome://extensions/ ) 扩展页面
 - 在右下角打开**开发人员模式**
 - 点击**加载解压缩的扩展**，选择解压后的文件夹根目录，点击确定
 - 刷新智学网网页，点击地址栏右侧的扩展图标即可使用
