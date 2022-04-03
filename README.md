@@ -8,6 +8,8 @@
 ![Alt](https://repobeats.axiom.co/api/embed/55b0946e57e5680f4a865aeb6f1b25f7e55d600e.svg "Repobeats analytics image")  
 ## **如有不更改或新内容请提issues or prs, thanks~**
 - 用于在智学网成绩报告页面以及考试原卷页面快速更改为满分的插件
+## **好！消！息！**
+- ZhixuewangScoreExt已经成功上架[Microsoft Edge Addons](https://microsoftedge.microsoft.com/addons/detail/zhixuewangscoreext/ppkbngflajmbfhdjeaiccfdjohldjhld)（即Edge扩展应用商店）！现在可以在Edge内直接接受安装和更新而无需下载*.crx或*.zip自己加载解压缩的扩展啦 😄🎉
 ## 如何使用？
 - 从[**Releases**](https://github.com/aquamarine5/ZhixuewangScoreExt/releases)处下载最新插件的zip包
 - 解压，打开Edge ( edge://extensions/ ) 或Chrome ( chrome://extensions/ ) 扩展页面
