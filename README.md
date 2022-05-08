@@ -11,6 +11,9 @@
 ## **好！消！息！**
 - ZhixuewangScoreExt已经成功上架[Microsoft Edge Addons](https://microsoftedge.microsoft.com/addons/detail/zhixuewangscoreext/ppkbngflajmbfhdjeaiccfdjohldjhld)（即Edge扩展应用商店）！现在可以在Edge内直接接受安装和更新而无需下载*.crx或*.zip自己加载解压缩的扩展啦 😄🎉
 ## 如何使用？
+### 方法一（仅限Microsoft Edge，推荐）：
+- 浏览[扩展发布页](https://microsoftedge.microsoft.com/addons/detail/zhixuewangscoreext/ppkbngflajmbfhdjeaiccfdjohldjhld)进行安装下载
+### 方法二（Chromiunm均可使用，就是麻烦）：
 - 从[**Releases**](https://github.com/aquamarine5/ZhixuewangScoreExt/releases)处下载最新插件的zip包
 - 解压，打开Edge ( edge://extensions/ ) 或Chrome ( chrome://extensions/ ) 扩展页面
 - 在右下角打开**开发人员模式**
