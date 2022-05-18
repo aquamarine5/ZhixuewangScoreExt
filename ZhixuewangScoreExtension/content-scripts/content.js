@@ -1,11 +1,14 @@
 console.log("Content-Scripts Load.")
+/*
 if (window.realmode){
     window.onload=function(){
         const w=new WaitForLoading(
             [".container-backgrounde[index='2']"
         ])
+        w.wait(function(){})
     }
 }
+*/
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log("Receive message of the popup.")
@@ -54,7 +57,7 @@ function original_roll_detail(request) {
     for (let index = 0; index < userscoreCollection.length; index++) {
         const element = userscoreCollection[index];
         const allscore = element.textContent.match(/(\d+\.?\d?)/g)[1];
-        element.textContent = element.textContent.replace(/(\d+\.?\d?)/, allscore);
+        element.textContent = element.textContent.replace(/-\d+/,"-0");
     }
     const tickCollection = document.getElementsByClassName("topic-sign");
     for (let index = 0; index < tickCollection.length; index++) {

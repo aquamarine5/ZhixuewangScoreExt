@@ -8,7 +8,7 @@ chrome.devtools.network.onRequestFinished.addListener(
     function (request) {
         request.getContent(function (content, encoding) {
             if (request.request.url == "") {
-                chrome
+                content+=1
             }
         })
     }
