@@ -1,14 +1,14 @@
 console.log("Content-Scripts Load.")
-/*
 if (window.realmode){
     window.onload=function(){
         const w=new WaitForLoading(
-            [".container-backgrounde[index='2']"
-        ])
+            [".container-backgrounde[index='2']"]
+        )
         w.wait(function(){})
     }
 }
-*/
+
+
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log("Receive message of the popup.")
@@ -20,7 +20,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         execZhixuewangAction(request)
     }
 })
-/* Real mode
 function single_report_detail(subject) {
     function isSingleReportDetailPageLoadedFinished(resolve) {
         if ($(".subject_analysis")[0] != undefined &&
@@ -47,7 +46,6 @@ function single_report_detail_binding() {
         element.getElementsByTagName("span")[0].onclick = single_report_detail
     }
 }
-*/
 function original_roll_detail(request) {
     let scoretext = document.getElementsByClassName("total-score-text")[0];
     const subject = document.getElementsByClassName("zx-tab-item tab-item current-tab");
