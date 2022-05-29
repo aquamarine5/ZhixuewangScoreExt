@@ -19,17 +19,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     else if (request.type == "FullMarkCallback") {
         execZhixuewangAction(request)
     }
-    else if(request.type=="GetInformation"){
-        var text=[]
-        var items=$(".sub-item")
-        items.forEach(element=>{
-            text.push(element.getElementsByClassName("subject")[0].textContent)
-        })
-        sendResponse({
-            subjectCount:items.length,
-            subjectName:text
-        })
-    }
 })
 /* Real mode
 function single_report_detail(subject) {
