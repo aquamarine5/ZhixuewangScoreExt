@@ -2,8 +2,7 @@ console.log("Content-Scripts Load.")
 if (window.realmode){
     window.onload=function(){
         const w=new WaitForLoading(
-            [".container-backgrounde[index='2']"
-        ])
+            [".container-backgrounde[index='2']"])
     }
 }
 
