@@ -1,10 +1,14 @@
 console.log("Content-Scripts Load.")
+
 if (window.realmode){
     window.onload=function(){
         const w=new WaitForLoading(
-            [".container-backgrounde[index='2']"])
+            [".container-backgrounde[index='2']"]
+        )
+        w.wait(function(){})
     }
 }
+
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log("Receive message of the popup.")
@@ -32,6 +36,7 @@ function single_report_detail(subject) {
         report_detail_v2({ image_url: window.image_url })
     })
 }
+
 function single_report_detail_binding() {
     if (document.location.href.search("report-detail") != -1) return;
     var tablist = $(".zx-tab-list .zx-tab-item")
@@ -41,6 +46,7 @@ function single_report_detail_binding() {
         element.getElementsByTagName("span")[0].onclick = single_report_detail
     }
 }
+
 function original_roll_detail(request) {
     let scoretext = document.getElementsByClassName("total-score-text")[0];
     const subject = document.getElementsByClassName("zx-tab-item tab-item current-tab");
@@ -53,7 +59,7 @@ function original_roll_detail(request) {
     for (let index = 0; index < userscoreCollection.length; index++) {
         const element = userscoreCollection[index];
         const allscore = element.textContent.match(/(\d+\.?\d?)/g)[1];
-        element.textContent = element.textContent.replace(/(\d+\.?\d?)/, allscore);
+        element.textContent = element.textContent.replace(/-\d+/,"-0");
     }
     const tickCollection = document.getElementsByClassName("topic-sign");
     for (let index = 0; index < tickCollection.length; index++) {
