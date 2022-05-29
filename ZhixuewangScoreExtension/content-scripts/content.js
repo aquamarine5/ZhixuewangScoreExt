@@ -19,7 +19,25 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     else if (request.type == "FullMarkCallback") {
         execZhixuewangAction(request)
     }
+    else if(request.type=="GetInformation"){
+        var text=[]
+        var items=$(".sub-item")
+        items.forEach(element=>{
+            text.push(element.getElementsByClassName("subject")[0].textContent)
+        })
+        sendResponse({
+            subjectCount:items.length,
+            subjectName:text,
+            panelValue:[]
+        })
+        console.log({
+            subjectCount:items.length,
+            subjectName:text,
+            panelValue:[]
+        })
+    }
 })
+/* Real mode
 function single_report_detail(subject) {
     function isSingleReportDetailPageLoadedFinished(resolve) {
         if ($(".subject_analysis")[0] != undefined &&
@@ -36,6 +54,7 @@ function single_report_detail(subject) {
         report_detail_v2({ image_url: window.image_url })
     })
 }
+
 function single_report_detail_binding() {
     if (document.location.href.search("report-detail") != -1) return;
     var tablist = $(".zx-tab-list .zx-tab-item")
@@ -45,6 +64,7 @@ function single_report_detail_binding() {
         element.getElementsByTagName("span")[0].onclick = single_report_detail
     }
 }
+*/
 function original_roll_detail(request) {
     let scoretext = document.getElementsByClassName("total-score-text")[0];
     const subject = document.getElementsByClassName("zx-tab-item tab-item current-tab");
