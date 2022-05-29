@@ -5,7 +5,8 @@
 [![Release date](https://img.shields.io/github/release-date-pre/aquamarine5/ZhixuewangScoreExt)]()
 [![Download count](https://img.shields.io/github/downloads/aquamarine5/ZhixuewangScoreExt/total)]()
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/aquamarine5/ZhixuewangScoreExt.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/aquamarine5/ZhixuewangScoreExt/context:javascript)
-![Alt](https://repobeats.axiom.co/api/embed/55b0946e57e5680f4a865aeb6f1b25f7e55d600e.svg "Repobeats analytics image")  
+
+![image.png](https://s2.loli.net/2022/05/22/4Ze5j3ysloSVCGn.png)
 ## **如有不更改或新内容请提issues or prs, thanks~**
 - 用于在智学网成绩报告页面以及考试原卷页面快速更改为满分的插件
 ## **好！消！息！**
@@ -46,3 +47,6 @@
 
 > 修改后：  
 > [![changed_error](README_images/changed_error.png)]()
+
+
+![Alt](https://repobeats.axiom.co/api/embed/55b0946e57e5680f4a865aeb6f1b25f7e55d600e.svg "Repobeats analytics image")  
