@@ -11,7 +11,8 @@ if (generate) {
                     chrome.extension.getURL("images/full_scoreRank_1.png"),
                     chrome.extension.getURL("images/full_scoreRank_2.png"),
                     chrome.extension.getURL("images/full_scoreRank_3.png"),
-                    chrome.extension.getURL("images/full_scoreRank_4.png")
+                    chrome.extension.getURL("images/full_scoreRank_4.png"),
+                    chrome.extension.getURL("images/full_scoreRank_5.png")
                 ]
             }, function (responce) { });
         })
