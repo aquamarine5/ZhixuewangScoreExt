@@ -1,6 +1,6 @@
 // Idea: https://blog.csdn.net/sw_onload/article/details/115250322
 chrome.devtools.panels.create(
-    "ZhixuewangScoreExt_DebugPanel",
+    "ZhixuewangScoreExt:WebRequestPanel",
     "../icons/Albedo_128x128.png",
     "panel.html", function (panel) { })
 var bgPage = chrome.runtime.connect({ name: "devtools-page" });

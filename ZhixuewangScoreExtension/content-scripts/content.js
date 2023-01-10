@@ -19,35 +19,59 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     else if (request.type == "FullMarkCallback") {
         execZhixuewangAction(request)
     }
+    else if( request.type=="GetRankCallback"){
+        getRank(request)
+    }
 })
-/* Real mode
-function single_report_detail(subject) {
-    function isSingleReportDetailPageLoadedFinished(resolve) {
-        if ($(".subject_analysis")[0] != undefined &&
-            $(".general span.specific")[0] != undefined &&
-            $(".container-backgrounde[index='2'] .class-running")[0] != undefined) {
-            resolve()
+function getRank(request){
+    
+    var http=new XMLHttpRequest()
+    http.open("GET","https://www.zhixue.com/zhixuebao/report/exam/getLevelTrend?examId="+
+        document.baseURI.match(/[abcdef\d]+-[abcdef\d]+-[abcdef\d]+-[abcdef\d]+-[abcdef\d]+/g)[0]+"&pageIndex=1&pageSize=5&")
+    http.setRequestHeader("XToken",localStorage.getItem("xToken"))
+    http.send()
+    http.onreadystatechange=function(ev){
+        if(ev.currentTarget.status=200 && ev.currentTarget.readyState==4){
+            console.log(ev)
+            let classTotalNumber=0,schoolTotalNumber=0
+            var r=JSON.parse(ev.currentTarget.responseText)
+            r.result.list.forEach(element => {
+                console.log(element)
+                if(element.tag.code=="grade")schoolTotalNumber=element.totalNum
+                else classTotalNumber=element.totalNum
+            });
+            var nhttp=new XMLHttpRequest()
+            nhttp.open("GET","https://www.zhixue.com/zhixuebao/report/exam/getSubjectDiagnosis?examId="+
+                document.baseURI.match(/[abcdef\d]+-[abcdef\d]+-[abcdef\d]+-[abcdef\d]+-[abcdef\d]+/g)[0]+"&")
+            nhttp.setRequestHeader("XToken",localStorage.getItem("xToken"))
+            nhttp.send()
+            nhttp.onreadystatechange=function(ev){
+                if(ev.currentTarget.status=200 && ev.currentTarget.readyState==4){
+                    var list={};
+                    JSON.parse(ev.currentTarget.responseText).result.list.forEach(element=>{
+                        list[element.subjectName]=element.myRank
+                    })
+                    const subjectScore = $("div.single div.sub-item")
+                    for (let index = 0; index < subjectScore.length; index++) {
+                        const element = subjectScore[index];
+                        const subjectName=encodeURIComponent(element.getElementsByClassName("subject")[0].textContent).replaceAll("%20","").replaceAll("%0A","")
+                        console.log(list)
+                        console.log(subjectName)
+                        const bold=element.getElementsByClassName("bold-level")[0]
+                        var s=document.createElement("span")
+                        s.setAttribute("style","font-weight: normal;")
+                        s.textContent=" 估算班排  "
+                        bold.appendChild(s)
+                        var f=document.createElement('span')
+                        f.setAttribute("style","font-weight: 700; color:#1473e5;")
+                        f.textContent=Math.ceil(list[decodeURIComponent(subjectName)]/100*classTotalNumber).toString()+"( "+(list[decodeURIComponent(subjectName)]/100*classTotalNumber).toFixed(1)+" )"
+                        bold.appendChild(f)
+                    }
+                }
+            }
         }
-        else setTimeout(isSingleReportDetailPageLoadedFinished, 100, resolve)
-    }
-    const promise = new Promise(function (resolve, reject) {
-        setTimeout(isSingleReportDetailPageLoadedFinished, 100, resolve)
-    })
-    promise.then(function (data) {
-        report_detail_v2({ image_url: window.image_url })
-    })
-}
-
-function single_report_detail_binding() {
-    if (document.location.href.search("report-detail") != -1) return;
-    var tablist = $(".zx-tab-list .zx-tab-item")
-    for (let index = 0; index < tablist.length; index++) {
-        const element = tablist[index];
-        window.nowSubject = element.getElementsByTagName("span")[1].textContent
-        element.getElementsByTagName("span")[0].onclick = single_report_detail
     }
 }
-*/
 function original_roll_detail(request) {
     let scoretext = document.getElementsByClassName("total-score-text")[0];
     const subject = document.getElementsByClassName("zx-tab-item tab-item current-tab");
