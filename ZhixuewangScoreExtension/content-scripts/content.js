@@ -65,6 +65,7 @@ function getRank(request){
                         var f=document.createElement('span')
                         f.setAttribute("style","font-weight: 700; color:#1473e5;")
                         f.textContent=Math.ceil(list[decodeURIComponent(subjectName)]/100*classTotalNumber).toString()+"( "+(list[decodeURIComponent(subjectName)]/100*classTotalNumber).toFixed(1)+" )"
+                        if(list[decodeURIComponent(subjectName)]==0) f.textContent="1 ( first )"
                         bold.appendChild(f)
                     }
                 }

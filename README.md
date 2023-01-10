@@ -22,7 +22,11 @@
 - 刷新智学网网页，点击地址栏右侧的扩展图标即可使用
 ## 免责声明
 <img src="README_images/klee_emoji.png" width="77" alt="rickroll">使用此插件带来的老师批评学生质疑等作者均不负责
+
 ## 效果实例
+
+### 获取班级排名
+> [![school_score](README_images/classRank.png)]()
 ### 修改分数为满分
 > 修改前：
 > [![previous_score](README_images/previous_score.png)]()
