@@ -13,7 +13,7 @@
 ## 如何使用？
 ### 方法一（仅限Microsoft Edge，推荐）：
 - 浏览[扩展发布页](https://microsoftedge.microsoft.com/addons/detail/zhixuewangscoreext/ppkbngflajmbfhdjeaiccfdjohldjhld)进行安装下载
-### 方法二（Chromiunm均可使用，就是麻烦）：
+### 方法二（Chromium均可使用，就是麻烦）：
 - 从[**Releases**](https://github.com/aquamarine5/ZhixuewangScoreExt/releases)处下载最新插件的zip包
 - 解压，打开Edge ( edge://extensions/ ) 或Chrome ( chrome://extensions/ ) 扩展页面
 - 在右下角打开**开发人员模式**
