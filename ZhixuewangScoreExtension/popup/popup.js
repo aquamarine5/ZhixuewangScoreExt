@@ -26,7 +26,16 @@ if (rank) {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {
                 type:"GetRankCallback"
-            }, function (responce) { });
+            }, function (responce) { 
+                var color;
+                if(responce.status==0) color="#009933"
+                else if(responce.status==1) color="#FF0000"
+                else color="#9933FF"
+                var l=document.createElement("span")
+                l.style.color=color
+                l.textContent=responce.message
+                document.getElementById("log_table").appendChild(l)
+            });
         })
     }
 }

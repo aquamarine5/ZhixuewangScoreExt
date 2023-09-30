@@ -1,9 +1,9 @@
 {
-  "name": "ZhixuewangScoreExt",
-  "version": "1.8",
+  "name": "__MSG_PACKAGE_NAME__",
+  "version": "1.9",
   "manifest_version": 3,
   "description": "用于在智学网成绩报告页面快速更改为满分的插件",
-  "default_locale":"zh_CN",
+  "default_locale":"zh",
   "icons": {
     "128": "icons/Albedo_128x128.png"
   },
