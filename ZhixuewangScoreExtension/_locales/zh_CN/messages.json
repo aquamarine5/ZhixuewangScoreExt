@@ -1,0 +1,17 @@
+{
+    "description":{
+        "message":""
+    },
+    "btn_fullscore":{
+        "message":"一键满分"
+    },
+    "btn_getrank":{
+        "message":"获取班级排名"
+    },
+    "btn_getrank_nochart":{
+        "message":"没有可用的六边形图（发挥水平学科诊断），可能是因为全科成绩没有全部公布"
+    },
+    "btn_url_error":{
+        "message":"请在查看全科成绩页面使用本插件"
+    }
+}

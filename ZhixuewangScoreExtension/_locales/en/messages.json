@@ -1,0 +1,17 @@
+{
+    "description":{
+        "message":""
+    },
+    "btn_fullscore":{
+        "message":"Full score"
+    },
+    "btn_getrank":{
+        "message":"Get rank"
+    },
+    "btn_getrank_nochart":{
+        "message":"There are no available hexagonal charts (playing level subject diagnostics), possibly because not all full subject results are available."
+    },
+    "btn_url_error":{
+        "message":"Please use this plugin on the view full results page."
+    }
+}

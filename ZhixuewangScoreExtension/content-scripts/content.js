@@ -25,9 +25,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 })
 function getRank(request){
     
+    var examId=sessionStorage.getItem('zxbReportExamId')
     var http=new XMLHttpRequest()
     http.open("GET","https://www.zhixue.com/zhixuebao/report/exam/getLevelTrend?examId="+
-        document.baseURI.match(/[abcdef\d]+-[abcdef\d]+-[abcdef\d]+-[abcdef\d]+-[abcdef\d]+/g)[0]+"&pageIndex=1&pageSize=5&")
+        examId+"&pageIndex=1&pageSize=5&")
     http.setRequestHeader("XToken",localStorage.getItem("xToken"))
     http.send()
     http.onreadystatechange=function(ev){
@@ -42,7 +43,7 @@ function getRank(request){
             });
             var nhttp=new XMLHttpRequest()
             nhttp.open("GET","https://www.zhixue.com/zhixuebao/report/exam/getSubjectDiagnosis?examId="+
-                document.baseURI.match(/[abcdef\d]+-[abcdef\d]+-[abcdef\d]+-[abcdef\d]+-[abcdef\d]+/g)[0]+"&")
+                examId+"&")
             nhttp.setRequestHeader("XToken",localStorage.getItem("xToken"))
             nhttp.send()
             nhttp.onreadystatechange=function(ev){
