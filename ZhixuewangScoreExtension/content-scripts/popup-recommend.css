@@ -1,0 +1,48 @@
+.ext_recommend_button{
+    display: inline-block;
+    padding-block: 6px;
+    padding-inline: 14px;
+    margin-inline: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color:#fff;
+    background-color: rgb(16, 185, 214);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 3px #999;
+}
+.ext_recommend_button:hover{
+background-color: #1795bb;
+}
+.ext_recommend_button:active{
+    background-color: #1795bb;
+    box-shadow: 0 5px #666;
+    transform:translateY(4px);
+}
+
+.ext_recommend_text{
+    padding: 12px;
+    color: #37cdbe;
+    font-weight: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.ext_recommend_tips{
+    padding-left: 12px;
+    font-size: smaller;
+    color: #8c8c8c;
+    display: flex;
+}
+
+.ext_recommend_link{
+    padding-left: 5px;
+}
+
+.ext_recommend_error{
+    padding: 12px;
+    color: #cc1d1d;
+}
