@@ -3,7 +3,7 @@
   "version": "1.10",
   "manifest_version": 3,
   "description": "用于在智学网成绩报告页面快速更改为满分的插件",
-  "default_locale":"zh",
+  "default_locale": "zh",
   "icons": {
     "128": "icons/Albedo_128x128.png"
   },
@@ -14,24 +14,30 @@
     "tabs",
     "storage"
   ],
-  
   "content_scripts": [
     {
-        "matches": [
-          "https://www.zhixue.com/*"
-        ],
-        "js": [
-          "libs/jquery-3.6.0.min.js",
-          "libs/wait4loading.js",
-          "content-scripts/core.js",
-          "content-scripts/popup-recommend.js"],
-        "css":[
-          "content-scripts/popup-recommend.css"
-        ]
+      "matches": [
+        "https://www.zhixue.com/*"
+      ],
+      "js": [
+        "libs/jquery-3.6.0.min.js",
+        "libs/wait4loading.js",
+        "content-scripts/core.js",
+        "content-scripts/popup-recommend.js"
+      ],
+      "css": [
+        "content-scripts/popup-recommend.css"
+      ]
     }
   ],
-  "web_accessible_resources": [{ 
-    "resources": ["/images/*.png"],
-    "matches": ["<all_urls>"]
-  }]
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "/images/*.png"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
 }
