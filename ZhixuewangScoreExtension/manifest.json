@@ -27,7 +27,7 @@
     }
   ],
   "web_accessible_resources": [{ 
-    "resources": ["/images/*.png"],
+    "resources": ["/images/*.png","/icons/Albedo_128x128.png"],
     "matches": ["<all_urls>"]
   }]
 }

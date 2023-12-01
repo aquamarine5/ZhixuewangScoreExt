@@ -225,8 +225,6 @@ function report_detail_v2(request, sendResponse) {
     sendResponse({"status":0,"message":"成功。\nSuccess."})
 }
 
-
-
 function execZhixuewangAction(request, sendResponse) {
     
     if(window.location.href.match("www.zhixue.com/activitystudy/web-report")==null){
@@ -239,3 +237,5 @@ function execZhixuewangAction(request, sendResponse) {
         original_roll_detail(request, sendResponse)
     }
 }
+document.ext_functions.getRank=getRank
+document.ext_functions.report_detail=report_detail_v2
