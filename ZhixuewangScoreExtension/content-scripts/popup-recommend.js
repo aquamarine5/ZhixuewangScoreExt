@@ -1,7 +1,23 @@
-console.log("ZhixuewangScoreExt beta feature: PopupRecommend.")
-document.addEventListener("readystatechange", (event) => {
-    console(`readystate: ${document.readyState}`);
+console.log("ZhixuewangScoreExt beta feature enabled: PopupRecommend.")
+
+var i=0;
+var interval=setInterval(function(){
+    i++;
+    console.log(i)
+    if(document.getElementsByClassName("hierarchy").length!=0){
+        console.log("Load successfully!")
+        clearInterval(interval)
+        interval=null;
+        setTimeout(execPopupRecommend,1000)
+    }
+    if(i>3000){
+        clearInterval(interval)
+        interval=null;
+    }
+},100)
+function execPopupRecommend(){
     if(checkAllScorePublished()){
+        console.log("a")
         var parent_div=document.getElementsByClassName("hierarchy")[0].children[0]
         var recommend_div=createElementEx("div","ext_recommend_div",parent_div)
         var text=createElementEx("div","ext_recommend_text",recommend_div)
@@ -18,20 +34,21 @@ document.addEventListener("readystatechange", (event) => {
         var tips=createElementEx("div","ext_recommend_tips",recommend_div)
         var github_repo=createElementEx("a","ext_recommend_link",tips)
         var github_script=createElementEx("a","ext_recommend_link",tips)
+        tips.innerText="插件功能由 ZhixuewangScoreExt 提供，并非官方提供的功能。"
         github_repo.setAttribute("href","")
         github_script.setAttribute("href","")
         github_repo.innerText="Github 项目地址"
         github_script.innerText="Github 脚本页面"
         document.recommend_div=recommend_div
     }
-});
+}
 
 function hideButton(){
     document.getElementsByClassName("ext_recommend_div")[0].remove()
 }
 
 function classrankButton(){
-    document.ext_functions.getRank(null,function(_){})
+    document.ext_functions_getRank(null,function(_){})
 }
 function fullscoreButton(){
     var error=createElementEx("div","ext_recommend_error",document.recommend_div)
@@ -44,6 +61,7 @@ function createElementEx(tagName,className,parent){
     var e=document.createElement(tagName)
     e.className=className
     parent.appendChild(e)
+    return e
 }
 
 function checkAllScorePublished(){

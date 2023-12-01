@@ -237,5 +237,5 @@ function execZhixuewangAction(request, sendResponse) {
         original_roll_detail(request, sendResponse)
     }
 }
-document.ext_functions.getRank=getRank
-document.ext_functions.report_detail=report_detail_v2
+document.ext_functions_getRank=getRank
+document.ext_functions_report_detail=report_detail_v2
