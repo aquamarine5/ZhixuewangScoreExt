@@ -34,9 +34,9 @@ function execPopupRecommend(){
         var tips=createElementEx("div","ext_recommend_tips",recommend_div)
         var github_repo=createElementEx("a","ext_recommend_link",tips)
         var github_script=createElementEx("a","ext_recommend_link",tips)
-        tips.innerText="插件功能由 ZhixuewangScoreExt 提供，并非官方提供的功能。"
         github_repo.setAttribute("href","")
         github_script.setAttribute("href","")
+        tips.innerText="插件功能由 ZhixuewangScoreExt 提供，并非官方提供的功能。"
         github_repo.innerText="Github 项目地址"
         github_script.innerText="Github 脚本页面"
         document.recommend_div=recommend_div
@@ -55,7 +55,7 @@ function fullscoreButton(){
     error.innerText="啊哦！我还不会从这里调用这项功能，不过其实你可以去右上角的扩展小拼图图标点开智学网分数插件调用的😊"
     setTimeout(function(){
         error.remove()
-    },5000)
+    },3000)
 }
 function createElementEx(tagName,className,parent){
     var e=document.createElement(tagName)

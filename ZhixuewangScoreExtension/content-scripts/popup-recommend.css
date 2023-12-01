@@ -1,6 +1,8 @@
 .ext_recommend_button{
     display: inline-block;
-    padding: 6px;
+    padding-block: 6px;
+    padding-inline: 14px;
+    margin-inline: 8px;
     font-size: 14px;
     cursor: pointer;
     text-align: center;
@@ -10,7 +12,7 @@
     background-color: rgb(16, 185, 214);
     border: none;
     border-radius: 15px;
-    box-shadow: 0 9px #999;
+    box-shadow: 0 3px #999;
 }
 .ext_recommend_button:hover{
 background-color: #1795bb;
@@ -26,6 +28,7 @@ background-color: #1795bb;
     color: #37cdbe;
     font-weight: 1000;
     display: flex;
+    align-items: center;
 }
 
 .ext_recommend_tips{
