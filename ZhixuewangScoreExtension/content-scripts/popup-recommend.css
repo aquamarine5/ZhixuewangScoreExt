@@ -9,19 +9,17 @@
     text-decoration: none;
     outline: none;
     color: #fff;
-    background-color: rgb(16, 185, 214);
+    background-color: #14cdc8;
     border: none;
     border-radius: 15px;
-    box-shadow: 0 3px #999;
 }
 
 .ext_recommend_button:hover {
-    background-color: #1795bb;
+    background-color: #14cdc8;
 }
 
 .ext_recommend_button:active {
-    background-color: #1795bb;
-    box-shadow: 0 5px #666;
+    background-color: #14cdc8;
     transform: translateY(4px);
 }
 

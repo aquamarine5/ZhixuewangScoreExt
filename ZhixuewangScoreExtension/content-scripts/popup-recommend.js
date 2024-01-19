@@ -1,5 +1,3 @@
-console.log("ZhixuewangScoreExt beta feature enabled: PopupRecommend.")
-
 var i = 0;
 var interval = setInterval(function () {
     i++;
@@ -32,7 +30,8 @@ function execPopupRecommend() {
         classrank_button.onclick = classrankButton
         fullscore_button.onclick = fullscoreButton
         var tips = createElementEx("div", "ext_recommend_tips", recommend_div)
-        tips.innerText = "插件功能由 ZhixuewangScoreExt 提供，并非官方提供的功能。"
+        var version=chrome.runtime.getManifest().version
+        tips.innerText = "插件功能由 ZhixuewangScoreExt(v"+version+") 提供，并非官方提供的功能。"
         var github_repo = createElementEx("a", "ext_recommend_link", tips)
         var github_script = createElementEx("a", "ext_recommend_link", tips)
         
@@ -54,11 +53,18 @@ function classrankButton() {
     document.ext_functions_getRank(null, function (_) { })
 }
 function fullscoreButton() {
-    var error = createElementEx("div", "ext_recommend_error", document.recommend_div)
-    error.innerText = "啊哦！我还不会从这里调用这项功能，不过其实你可以去右上角的扩展小拼图图标点开智学网分数插件调用的😊"
-    setTimeout(function () {
-        error.remove()
-    }, 3000)
+    
+    document.ext_functions_report_detail({
+        type: "FullMarkCallback",
+        image_url: chrome.runtime.getURL("images/fullmark_analyse.png"),
+        scoreRanks: [
+            chrome.runtime.getURL("images/full_scoreRank_1.png"),
+            chrome.runtime.getURL("images/full_scoreRank_2.png"),
+            chrome.runtime.getURL("images/full_scoreRank_3.png"),
+            chrome.runtime.getURL("images/full_scoreRank_4.png"),
+            chrome.runtime.getURL("images/full_scoreRank_5.png")
+        ]
+    }, function (_) { })
 }
 function createElementEx(tagName, className, parent) {
     var e = document.createElement(tagName)

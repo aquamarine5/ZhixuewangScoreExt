@@ -57,6 +57,7 @@ function getRank(request, sendResponse) {
                         bold.appendChild(s)
                         var f = document.createElement('span')
                         f.setAttribute("style", "font-weight: 700; color:#1473e5;")
+                        f.className="ext_classrank"
                         f.textContent = Math.ceil(list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toString() + "( " + (list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toFixed(1) + " )"
                         if (list[decodeURIComponent(subjectName)] == 0) f.textContent = "1 ( first )"
                         bold.appendChild(f)
@@ -166,6 +167,14 @@ function report_detail_v2(request, sendResponse) {
         for (let index = 0; index < subjectScore.length; index++) {
             const element = subjectScore[index];
             element.getElementsByClassName("blue")[0].textContent = element.getElementsByClassName("specific")[0].textContent.match(/(\d+\.?\d?)/g)[0]
+        }
+        edit_class_rank()
+    }
+    function edit_class_rank(){
+
+        const predictedClassRank = $("span.ext_classrank")
+        for (let index = 0; index < predictedClassRank.length; index++) {
+            predictedClassRank.textContent="1 ( first )"
         }
     }
     function edit_container_0() { }
