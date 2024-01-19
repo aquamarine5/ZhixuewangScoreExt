@@ -157,6 +157,7 @@ function report_detail_v1(request) {
 function report_detail_v2(request, sendResponse) {
     function change_full_score() {
         // 单科成绩或全科总成绩
+        edit_class_rank()
         if ($(".general span.specific")[0] != undefined) var head = ".general "
         else var head = ""
         var fullscore = $(head + "span.specific")[0].textContent.match(/(\d+\.?\d?)/g)[0];
@@ -168,13 +169,12 @@ function report_detail_v2(request, sendResponse) {
             const element = subjectScore[index];
             element.getElementsByClassName("blue")[0].textContent = element.getElementsByClassName("specific")[0].textContent.match(/(\d+\.?\d?)/g)[0]
         }
-        edit_class_rank()
     }
     function edit_class_rank(){
 
-        const predictedClassRank = $("span.ext_classrank")
+        const predictedClassRank = document.getElementsByClassName("ext_classrank")
         for (let index = 0; index < predictedClassRank.length; index++) {
-            predictedClassRank.textContent="1 ( first )"
+            predictedClassRank[index].textContent="1 ( first )"
         }
     }
     function edit_container_0() { }
