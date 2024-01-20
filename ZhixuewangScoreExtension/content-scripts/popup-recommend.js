@@ -8,7 +8,8 @@ var interval = setInterval(function () {
         interval = null;
         setTimeout(execPopupRecommend, 1000)
     }
-    if (i > 3000) {
+    if (i > 100) {
+        console.warn("try 100 times, clear interval action.")
         clearInterval(interval)
         interval = null;
     }
@@ -18,11 +19,11 @@ function execPopupRecommend() {
         console.log("a")
         var parent_div = document.getElementsByClassName("hierarchy")[0].children[0]
         var recommend_div = createElementEx("div", "ext_recommend_div", parent_div)
-        var text = createElementEx("div", "ext_recommend_text", recommend_div)
-        text.innerText = "需要智学网插件的帮助吗？"
-        var classrank_button = createElementEx("div", "ext_recommend_button", text)
-        var fullscore_button = createElementEx("div", "ext_recommend_button", text)
-        var hide_button = createElementEx("div", "ext_recommend_button", text)
+        var text_div = createElementEx("div", "ext_recommend_text", recommend_div)
+        text_div.innerText = "需要智学网插件的帮助吗？"
+        var classrank_button = createElementEx("div", "ext_recommend_button", text_div)
+        var fullscore_button = createElementEx("div", "ext_recommend_button", text_div)
+        var hide_button = createElementEx("div", "ext_recommend_button", text_div)
         hide_button.innerText = "隐藏"
         classrank_button.innerText = "查看班级排名"
         fullscore_button.innerText = "一键满分"
@@ -31,7 +32,7 @@ function execPopupRecommend() {
         fullscore_button.onclick = fullscoreButton
         var tips = createElementEx("div", "ext_recommend_tips", recommend_div)
         var version=chrome.runtime.getManifest().version
-        tips.innerText = "插件功能由 ZhixuewangScoreExt(v"+version+") 提供，并非官方提供的功能。"
+        tips.innerText = "插件功能由 ZhixuewangScoreExt(v"+version+") 提供，并非官方提供的功能。 @海蓝色的咕咕鸽 (@aquamarine5, RenegadeCreation)"
         var github_repo = createElementEx("a", "ext_recommend_link", tips)
         var github_script = createElementEx("a", "ext_recommend_link", tips)
         
@@ -40,9 +41,45 @@ function execPopupRecommend() {
         
         github_repo.innerText = "Github 项目地址"
         github_script.innerText = "Github 脚本页面"
-        console.log(github_repo)
+
+        document.ext_editmode=false
+        document.ext_editmode_action=editModeAction
+        var editmode_button=createElementEx("div","ext_recommend_button",text_div)
+        editmode_button.onclick=editModeButton
         document.recommend_div = recommend_div
     }
+}
+function editModeAction(item,score){
+    var scoreItem=item.parentNode.parentNode.getElementsByClassName("blue")[0]
+    scoreItem.textContent=parseInt(scoreItem.textContent)+score
+}
+function editModeButton(){
+    function createButtonEx(tagName,className,parent_div,onClick,textContent){
+        var item=createElementEx(tagName,className,parent_div)
+        item.setAttribute("onclick",onClick)
+        item.textContent=textContent
+        return item
+    }
+    if(!document.ext_editmode){
+        var subjectItems=document.getElementsByClassName("sub-item")
+        for (let index = 0; index < subjectItems.length; index++) {
+            const element = subjectItems[index];
+            var container=createElementEx("div","ext_editmode_container",element)
+            createButtonEx("div","ext_editmode_btn_minus",container,"document.ext_editmode_action(this,-5)",-5)
+            createButtonEx("div","ext_editmode_btn_minus",container,"document.ext_editmode_action(this,-1)",-1)
+            
+            createButtonEx("div","ext_editmode_btn_plus",container,"document.ext_editmode_action(this,1)",1)
+            createButtonEx("div","ext_editmode_btn_plus",container,"document.ext_editmode_action(this,5)",5)
+        }
+    }else{
+        
+        var editmodeContainers=document.getElementsByClassName("ext_editmode_container")
+        for (let index = 0; index < editmodeContainers.length; index++) {
+            const element = editmodeContainers[index];
+            element.remove()
+        }
+    }
+    document.ext_editmode=!document.ext_editmode
 }
 
 function hideButton() {
@@ -56,7 +93,11 @@ function fullscoreButton() {
     
     document.ext_functions_report_detail({
         type: "FullMarkCallback",
-        image_url: chrome.runtime.getURL("images/fullmark_analyse.png"),
+        image_url: {
+            "default":chrome.runtime.getURL("images/fullmark_analyse_9.png"),
+            "6":chrome.runtime.getURL("images/fullmark_analyse_6.png"),
+            "9":chrome.runtime.getURL("images/fullmark_analyse_9.png")
+        },
         scoreRanks: [
             chrome.runtime.getURL("images/full_scoreRank_1.png"),
             chrome.runtime.getURL("images/full_scoreRank_2.png"),

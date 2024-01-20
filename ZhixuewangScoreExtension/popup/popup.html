@@ -5,7 +5,10 @@
     <meta charset="utf-8" />
     <script src="../libs/jquery-3.6.0.min.js"></script>
     <script src="../libs/wait4loading.js"></script>
-
+    <script>
+        var version_code=document.getElementsByClassName("version_code")[0]
+        version_code.textContent=" v"+chrome.runtime.getManifest().version
+    </script>
     <style>
         body {
             width: 250px;
@@ -26,7 +29,8 @@
     <button id="rank">获取排名</button>
     <span>打开智学网学情报告的全科成绩页面即可使用本插件 ZhixuewangScoreExt无法读取除zhixue.com以外的其他网站的任何数据，并不会存储任何隐私</span>
     <script src="popup.js"></script>
-    <span>ZhixuewangScoreExt v1.11 
+    <span>ZhixuewangScoreExt
+        <span class="version_code"></span>
         <a href="https://github.com/aquamarine5/ZhixuewangScoreExt">Github Repo</a>
     </span>
     <table id="log_table"></table>

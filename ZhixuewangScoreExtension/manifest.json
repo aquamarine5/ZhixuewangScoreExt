@@ -21,7 +21,6 @@
       ],
       "js": [
         "libs/jquery-3.6.0.min.js",
-        "libs/wait4loading.js",
         "content-scripts/core.js",
         "content-scripts/popup-recommend.js"
       ],

@@ -20,7 +20,7 @@
 
 .ext_recommend_button:active {
     background-color: #14cdc8;
-    transform: translateY(4px);
+    transform: translateY(2px);
 }
 
 .ext_recommend_text {
@@ -46,4 +46,40 @@
 .ext_recommend_error {
     padding: 12px;
     color: #cc1d1d;
+}
+
+.ext_editmode_btn_plus{
+    font-size: 18px;
+    padding-inline: 16px;
+    padding-block: 6px;
+    display: inline-block;
+    margin-inline: 8px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #14cdc8;
+    border: none;
+    border-radius: 15px;
+}
+
+.ext_editmode_btn_minus{
+    font-size: 18px;
+    padding-inline: 16px;
+    padding-block: 6px;
+    display: inline-block;
+    margin-inline: 8px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #f43e06;
+    border: none;
+    border-radius: 15px;
+}
+
+.ext_editmode_container{
+    margin-left: 75px;
 }

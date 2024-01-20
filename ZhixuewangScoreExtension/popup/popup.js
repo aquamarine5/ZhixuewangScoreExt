@@ -8,7 +8,11 @@ if (generate) {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {
                 type: "FullMarkCallback",
-                image_url: chrome.runtime.getURL("images/fullmark_analyse.png"),
+                image_url: {
+                    "default":chrome.runtime.getURL("images/fullmark_analyse_9.png"),
+                    "6":chrome.runtime.getURL("images/fullmark_analyse_6.png"),
+                    "9":chrome.runtime.getURL("images/fullmark_analyse_9.png")
+                },
                 scoreRanks: [
                     chrome.runtime.getURL("images/full_scoreRank_1.png"),
                     chrome.runtime.getURL("images/full_scoreRank_2.png"),
