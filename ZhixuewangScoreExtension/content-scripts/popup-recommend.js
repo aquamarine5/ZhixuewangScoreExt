@@ -1,5 +1,3 @@
-console.log("ZhixuewangScoreExt beta feature enabled: PopupRecommend.")
-
 var i = 0;
 var interval = setInterval(function () {
     i++;
@@ -10,7 +8,8 @@ var interval = setInterval(function () {
         interval = null;
         setTimeout(execPopupRecommend, 1000)
     }
-    if (i > 3000) {
+    if (i > 100) {
+        console.warn("try 100 times, clear interval action.")
         clearInterval(interval)
         interval = null;
     }
@@ -20,11 +19,11 @@ function execPopupRecommend() {
         console.log("a")
         var parent_div = document.getElementsByClassName("hierarchy")[0].children[0]
         var recommend_div = createElementEx("div", "ext_recommend_div", parent_div)
-        var text = createElementEx("div", "ext_recommend_text", recommend_div)
-        text.innerText = "需要智学网插件的帮助吗？"
-        var classrank_button = createElementEx("div", "ext_recommend_button", text)
-        var fullscore_button = createElementEx("div", "ext_recommend_button", text)
-        var hide_button = createElementEx("div", "ext_recommend_button", text)
+        var text_div = createElementEx("div", "ext_recommend_text", recommend_div)
+        text_div.innerText = "需要智学网插件的帮助吗？"
+        var classrank_button = createElementEx("div", "ext_recommend_button", text_div)
+        var fullscore_button = createElementEx("div", "ext_recommend_button", text_div)
+        var hide_button = createElementEx("div", "ext_recommend_button", text_div)
         hide_button.innerText = "隐藏"
         classrank_button.innerText = "查看班级排名"
         fullscore_button.innerText = "一键满分"
@@ -32,7 +31,8 @@ function execPopupRecommend() {
         classrank_button.onclick = classrankButton
         fullscore_button.onclick = fullscoreButton
         var tips = createElementEx("div", "ext_recommend_tips", recommend_div)
-        tips.innerText = "插件功能由 ZhixuewangScoreExt 提供，并非官方提供的功能。"
+        var version=chrome.runtime.getManifest().version
+        tips.innerText = "插件功能由 ZhixuewangScoreExt(v"+version+") 提供，并非官方提供的功能。 @海蓝色的咕咕鸽 (@aquamarine5, RenegadeCreation)"
         var github_repo = createElementEx("a", "ext_recommend_link", tips)
         var github_script = createElementEx("a", "ext_recommend_link", tips)
         
@@ -41,9 +41,48 @@ function execPopupRecommend() {
         
         github_repo.innerText = "Github 项目地址"
         github_script.innerText = "Github 脚本页面"
-        console.log(github_repo)
+
+        document.ext_editmode=false
+        var editmode_button=createElementEx("div","ext_recommend_button",text_div)
+        editmode_button.onclick=editModeButton
+        editmode_button.innerText="进入编辑分数模式"
         document.recommend_div = recommend_div
     }
+}
+function editModeButton(){
+    if(document.ext_editmode==undefined)document.ext_editmode=false
+    function createButtonEx(tagName,className,parent_div,onClick,textContent){
+        var item=createElementEx(tagName,className,parent_div)
+        item.setAttribute("onclick",onClick)
+        item.textContent=textContent
+        return item
+    }
+    var editmodeButton=document.getElementsByClassName("ext_recommend_button")[0]
+    if(!document.ext_editmode){
+        editmodeButton.innerText="退出编辑分数模式"
+        var subjectItems=document.getElementsByClassName("sub-item")
+        for (let index = 0; index < subjectItems.length; index++) {
+            const element = subjectItems[index];
+            var container=createElementEx("div","ext_editmode_container",element)
+            var onclickCommand="var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseInt(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseInt(g.textContent)%%"
+            createButtonEx("div","ext_editmode_btn_minus",container,onclickCommand.replace(/%%/g,"-5"),"-5")
+            createButtonEx("div","ext_editmode_btn_minus",container,onclickCommand.replace(/%%/g,"-1"),"-1")
+            
+            createButtonEx("div","ext_editmode_btn_plus",container,onclickCommand.replace(/%%/g,"+1"),"+1")
+            createButtonEx("div","ext_editmode_btn_plus",container,onclickCommand.replace(/%%/g,"+5"),"+5")
+        }
+    }else{
+        editmodeButton.innerText="进入编辑分数模式"
+        for (let index = 0; index < 4; index++) {
+            var editmodeContainers=document.getElementsByClassName("ext_editmode_container")
+            for (let index = 0; index < editmodeContainers.length; index++) {
+                const element = editmodeContainers[index];
+                element.remove()
+            }
+            if(document.getElementsByClassName("ext_editmode_container").length==0) break;
+        }
+    }
+    document.ext_editmode=!document.ext_editmode
 }
 
 function hideButton() {
@@ -54,11 +93,22 @@ function classrankButton() {
     document.ext_functions_getRank(null, function (_) { })
 }
 function fullscoreButton() {
-    var error = createElementEx("div", "ext_recommend_error", document.recommend_div)
-    error.innerText = "啊哦！我还不会从这里调用这项功能，不过其实你可以去右上角的扩展小拼图图标点开智学网分数插件调用的😊"
-    setTimeout(function () {
-        error.remove()
-    }, 3000)
+    
+    document.ext_functions_report_detail({
+        type: "FullMarkCallback",
+        image_url: {
+            "default":chrome.runtime.getURL("images/fullmark_analyse_9.png"),
+            "6":chrome.runtime.getURL("images/fullmark_analyse_6.png"),
+            "9":chrome.runtime.getURL("images/fullmark_analyse_9.png")
+        },
+        scoreRanks: [
+            chrome.runtime.getURL("images/full_scoreRank_1.png"),
+            chrome.runtime.getURL("images/full_scoreRank_2.png"),
+            chrome.runtime.getURL("images/full_scoreRank_3.png"),
+            chrome.runtime.getURL("images/full_scoreRank_4.png"),
+            chrome.runtime.getURL("images/full_scoreRank_5.png")
+        ]
+    }, function (_) { })
 }
 function createElementEx(tagName, className, parent) {
     var e = document.createElement(tagName)

@@ -1,6 +1,6 @@
 {
   "name": "__MSG_PACKAGE_NAME__",
-  "version": "1.10",
+  "version": "1.11",
   "manifest_version": 3,
   "description": "用于在智学网成绩报告页面快速更改为满分的插件",
   "default_locale": "zh",
@@ -21,7 +21,6 @@
       ],
       "js": [
         "libs/jquery-3.6.0.min.js",
-        "libs/wait4loading.js",
         "content-scripts/core.js",
         "content-scripts/popup-recommend.js"
       ],

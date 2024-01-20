@@ -57,6 +57,7 @@ function getRank(request, sendResponse) {
                         bold.appendChild(s)
                         var f = document.createElement('span')
                         f.setAttribute("style", "font-weight: 700; color:#1473e5;")
+                        f.className="ext_classrank"
                         f.textContent = Math.ceil(list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toString() + "( " + (list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toFixed(1) + " )"
                         if (list[decodeURIComponent(subjectName)] == 0) f.textContent = "1 ( first )"
                         bold.appendChild(f)
@@ -90,72 +91,17 @@ function original_roll_detail(request, sendResponse) {
     }
     sendResponse({ "status": 0, "message": "成功。\nSuccess." })
 }
-/** 
- * This method not available in now report detail page.
- * @deprecated
- */
-function report_detail_v1(request) {
-    var canvas = document.getElementsByClassName("subject_analysis")[0]
-    canvas.remove()
-    var analyse_div = document.getElementsByClassName("subject_analysis_div")[0]
-    var img = document.createElement("img");
-    img.setAttribute('src', request.image_url)
-    analyse_div.appendChild(img)
-    const scores = document.getElementsByClassName("guideWapper")
-    for (let index = 0; index < scores.length; index++) {
-        const element = scores[index];
-        var mask = element.getElementsByClassName("subject_analysis_mark_span")
-        if (mask.length == 0) {
-            /*
-            var parent=element.getElementsByClassName("subject_analysis_mark_bg_div_normal")[0]
-            parent.className="subject_analysis_mark_bg_div_mask"
-            var m=document.createElement("span")
-            m.setAttribute("class","subject_analysis_mark_span")
-            m.setAttribute("style","background:#06C1AE;")
-            m.textContent="很赞"
-            parent.appendChild(m)*/
-        }
-        else {
-            if (mask[0].textContent == "偏科") {
-                mask[0].textContent = "很赞"
-                mask[0].setAttribute("style", "background:#06C1AE;")
-            }
-        }
-    }
-    var fullscore = document.getElementsByClassName("tspt_fullScore")[0].textContent.match(/(\d+\.?\d?)/)[0]
-    var totalscore = document.getElementsByClassName("tspt_score")[0]
-    totalscore.textContent = totalscore.textContent.replace(/(\d+\.?\d?)/, fullscore).replace("分", "")
-    var text = document.createElement("em")
-    text.setAttribute("style", "")
-    text.textContent = "分"
-    totalscore.appendChild(text)
-    var scorelist = document.getElementsByClassName("tspt_sujectList")[0].getElementsByTagName("li")
-    for (let index = 0; index < scorelist.length; index++) {
-        const element = scorelist[index];
-        var fs = element.getElementsByTagName("i")[0].textContent.match(/(\d+)/)[0]
-        var ts = element.getElementsByClassName("tspt_subjectScore")[0]
-        ts.textContent = ts.textContent.replace(/(\d+\.?\d?)/, fs)
-        var mask = element.getElementsByClassName("grade-tips")
-        if (mask.length == 0) {
-            var parent = element.getElementsByClassName("tspt_subjectWrap")[0]
-            var m = document.createElement("span")
-            m.setAttribute("class", "grade-tips")
-            m.setAttribute("style", "background: rgb(6, 193, 174);")
-            m.textContent = "很赞"
-            parent.appendChild(m)
-        }
-        else {
-            if (mask[0].textContent == "偏科") {
-                mask[0].textContent = "很赞"
-                mask[0].setAttribute("style", "background: rgb(6, 193, 174);")
-            }
-        }
-    }
-}
 
+function tryRemove(object,length){
+    object=$(object)
+    if(!object) return
+    if(length!=undefined){ if(object[length]) object[length].remove()}
+    else object.remove()
+}
 function report_detail_v2(request, sendResponse) {
     function change_full_score() {
         // 单科成绩或全科总成绩
+        edit_class_rank()
         if ($(".general span.specific")[0] != undefined) var head = ".general "
         else var head = ""
         var fullscore = $(head + "span.specific")[0].textContent.match(/(\d+\.?\d?)/g)[0];
@@ -168,10 +114,17 @@ function report_detail_v2(request, sendResponse) {
             element.getElementsByClassName("blue")[0].textContent = element.getElementsByClassName("specific")[0].textContent.match(/(\d+\.?\d?)/g)[0]
         }
     }
+    function edit_class_rank(){
+
+        const predictedClassRank = document.getElementsByClassName("ext_classrank")
+        for (let index = 0; index < predictedClassRank.length; index++) {
+            predictedClassRank[index].textContent="1 ( first )"
+        }
+    }
     function edit_container_0() { }
     function edit_container_2() {
-        $.tryRemove(".container-backgrounde[index='2'] .class-score-level-selected-exam-name", 0)
-        $.tryRemove(".container-backgrounde[index='2'] canvas")
+        tryRemove(".container-backgrounde[index='2'] .class-score-level-selected-exam-name", 0)
+        tryRemove(".container-backgrounde[index='2'] canvas")
         $(".container-backgrounde[index='2'] .class-running")[0].setAttribute("style", "left: 50.8114514%;")
         const levelpoints = $(".container-backgrounde[index='2'] .class-score-level-point-tag")
         const levelpopup = $(".container-backgrounde[index='2'] .class-score-level-popup")
@@ -188,19 +141,26 @@ function report_detail_v2(request, sendResponse) {
         }
     }
     function edit_container_3() {
-        $.tryRemove($(".subject_analysis"), 0)
+        tryRemove($(".subject_analysis"), 0)
         var img = document.createElement("img");
-        img.setAttribute('src', request.image_url)
+        var subjectCount=$(".hierarchy .single div.sub-item").length
+        var index=request.image_url.indexOf(subjectCount.toString())
+        if(index==-1){
+            img.setAttribute('src', request.image_url["default"])
+        }
+        else{
+            img.setAttribute('src', request.image_url[subjectCount.toString()])
+        }
         $(".subject_analysis_div")[0].appendChild(img)
     }
     function edit_container_5() {
-        $.tryRemove(".container-backgrounde[index='5'] .loss-analysis", 0)
-        $.tryRemove(".container-backgrounde[index='5'] .loss-diagnosis", 0)
-        $.tryRemove(".container-backgrounde[index='5'] .class-b-container", 0)
+        tryRemove(".container-backgrounde[index='5'] .loss-analysis", 0)
+        tryRemove(".container-backgrounde[index='5'] .loss-diagnosis", 0)
+        tryRemove(".container-backgrounde[index='5'] .class-b-container", 0)
         $(".container-backgrounde[index='5'] .class-a-title-tips")[0].textContent = "太棒了! 你竟然没有错题! "  // 编的
     }
     function edit_container_6() {
-        $.tryRemove(".container-backgrounde[index='6'] .index-pane", 0)
+        tryRemove(".container-backgrounde[index='6'] .index-pane", 0)
         $(".container-backgrounde[index='6'] .class-a-title-tips")[0].textContent = "竟然没有错题! 继续复习吧"
     }
     const containers = $(".container-backgrounde")
