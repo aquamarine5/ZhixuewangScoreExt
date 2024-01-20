@@ -43,40 +43,43 @@ function execPopupRecommend() {
         github_script.innerText = "Github 脚本页面"
 
         document.ext_editmode=false
-        document.ext_editmode_action=editModeAction
         var editmode_button=createElementEx("div","ext_recommend_button",text_div)
         editmode_button.onclick=editModeButton
+        editmode_button.innerText="进入编辑分数模式"
         document.recommend_div = recommend_div
     }
 }
-function editModeAction(item,score){
-    var scoreItem=item.parentNode.parentNode.getElementsByClassName("blue")[0]
-    scoreItem.textContent=parseInt(scoreItem.textContent)+score
-}
 function editModeButton(){
+    if(document.ext_editmode==undefined)document.ext_editmode=false
     function createButtonEx(tagName,className,parent_div,onClick,textContent){
         var item=createElementEx(tagName,className,parent_div)
         item.setAttribute("onclick",onClick)
         item.textContent=textContent
         return item
     }
+    var editmodeButton=document.getElementsByClassName("ext_recommend_button")[0]
     if(!document.ext_editmode){
+        editmodeButton.innerText="退出编辑分数模式"
         var subjectItems=document.getElementsByClassName("sub-item")
         for (let index = 0; index < subjectItems.length; index++) {
             const element = subjectItems[index];
             var container=createElementEx("div","ext_editmode_container",element)
-            createButtonEx("div","ext_editmode_btn_minus",container,"document.ext_editmode_action(this,-5)",-5)
-            createButtonEx("div","ext_editmode_btn_minus",container,"document.ext_editmode_action(this,-1)",-1)
+            var onclickCommand="var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseInt(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseInt(g.textContent)%%"
+            createButtonEx("div","ext_editmode_btn_minus",container,onclickCommand.replace(/%%/g,"-5"),"-5")
+            createButtonEx("div","ext_editmode_btn_minus",container,onclickCommand.replace(/%%/g,"-1"),"-1")
             
-            createButtonEx("div","ext_editmode_btn_plus",container,"document.ext_editmode_action(this,1)",1)
-            createButtonEx("div","ext_editmode_btn_plus",container,"document.ext_editmode_action(this,5)",5)
+            createButtonEx("div","ext_editmode_btn_plus",container,onclickCommand.replace(/%%/g,"+1"),"+1")
+            createButtonEx("div","ext_editmode_btn_plus",container,onclickCommand.replace(/%%/g,"+5"),"+5")
         }
     }else{
-        
-        var editmodeContainers=document.getElementsByClassName("ext_editmode_container")
-        for (let index = 0; index < editmodeContainers.length; index++) {
-            const element = editmodeContainers[index];
-            element.remove()
+        editmodeButton.innerText="进入编辑分数模式"
+        for (let index = 0; index < 4; index++) {
+            var editmodeContainers=document.getElementsByClassName("ext_editmode_container")
+            for (let index = 0; index < editmodeContainers.length; index++) {
+                const element = editmodeContainers[index];
+                element.remove()
+            }
+            if(document.getElementsByClassName("ext_editmode_container").length==0) break;
         }
     }
     document.ext_editmode=!document.ext_editmode
