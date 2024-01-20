@@ -23,6 +23,12 @@ function execPopupRecommend() {
         text_div.innerText = "需要智学网插件的帮助吗？"
         var classrank_button = createElementEx("div", "ext_recommend_button", text_div)
         var fullscore_button = createElementEx("div", "ext_recommend_button", text_div)
+        document.ext_editmode = false
+        var editmode_button = createElementEx("div", "ext_recommend_button", text_div)
+        editmode_button.onclick = editModeButton
+        editmode_button.innerText = "进入编辑分数模式"
+        editmode_button.setAttribute("id","ext_btn_editmode")
+        document.recommend_div = recommend_div
         var hide_button = createElementEx("div", "ext_recommend_button", text_div)
         hide_button.innerText = "隐藏"
         classrank_button.innerText = "查看班级排名"
@@ -31,58 +37,53 @@ function execPopupRecommend() {
         classrank_button.onclick = classrankButton
         fullscore_button.onclick = fullscoreButton
         var tips = createElementEx("div", "ext_recommend_tips", recommend_div)
-        var version=chrome.runtime.getManifest().version
-        tips.innerText = "插件功能由 ZhixuewangScoreExt(v"+version+") 提供，并非官方提供的功能。 @海蓝色的咕咕鸽 (@aquamarine5, RenegadeCreation)"
+        var version = chrome.runtime.getManifest().version
+        tips.innerText = "插件功能由 ZhixuewangScoreExt(v" + version + ") 提供，并非官方提供的功能。 @海蓝色的咕咕鸽 (@aquamarine5, RenegadeCreation)"
         var github_repo = createElementEx("a", "ext_recommend_link", tips)
         var github_script = createElementEx("a", "ext_recommend_link", tips)
-        
+
         github_repo.setAttribute("href", "https://github.com/aquamarine5/ZhixuewangScoreExt")
         github_script.setAttribute("href", "https://github.com/aquamarine5/ZhixuewangScoreExt/blob/main/ZhixuewangScoreExtension/content-scripts/core.js")
-        
+
         github_repo.innerText = "Github 项目地址"
         github_script.innerText = "Github 脚本页面"
 
-        document.ext_editmode=false
-        var editmode_button=createElementEx("div","ext_recommend_button",text_div)
-        editmode_button.onclick=editModeButton
-        editmode_button.innerText="进入编辑分数模式"
-        document.recommend_div = recommend_div
     }
 }
-function editModeButton(){
-    if(document.ext_editmode==undefined)document.ext_editmode=false
-    function createButtonEx(tagName,className,parent_div,onClick,textContent){
-        var item=createElementEx(tagName,className,parent_div)
-        item.setAttribute("onclick",onClick)
-        item.textContent=textContent
+function editModeButton() {
+    if (document.ext_editmode == undefined) document.ext_editmode = false
+    function createButtonEx(tagName, className, parent_div, onClick, textContent) {
+        var item = createElementEx(tagName, className, parent_div)
+        item.setAttribute("onclick", onClick)
+        item.textContent = textContent
         return item
     }
-    var editmodeButton=document.getElementsByClassName("ext_recommend_button")[0]
-    if(!document.ext_editmode){
-        editmodeButton.innerText="退出编辑分数模式"
-        var subjectItems=document.getElementsByClassName("sub-item")
+    var editmodeButton = document.getElementById("ext_btn_editmode")
+    if (!document.ext_editmode) {
+        editmodeButton.textContent = "退出编辑分数模式"
+        var subjectItems = document.getElementsByClassName("sub-item")
         for (let index = 0; index < subjectItems.length; index++) {
             const element = subjectItems[index];
-            var container=createElementEx("div","ext_editmode_container",element)
-            var onclickCommand="var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseInt(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseInt(g.textContent)%%"
-            createButtonEx("div","ext_editmode_btn_minus",container,onclickCommand.replace(/%%/g,"-5"),"-5")
-            createButtonEx("div","ext_editmode_btn_minus",container,onclickCommand.replace(/%%/g,"-1"),"-1")
-            
-            createButtonEx("div","ext_editmode_btn_plus",container,onclickCommand.replace(/%%/g,"+1"),"+1")
-            createButtonEx("div","ext_editmode_btn_plus",container,onclickCommand.replace(/%%/g,"+5"),"+5")
+            var container = createElementEx("div", "ext_editmode_container", element)
+            var onclickCommand = "var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseInt(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseInt(g.textContent)%%"
+            createButtonEx("div", "ext_editmode_btn_minus", container, onclickCommand.replace(/%%/g, "-5"), "-5")
+            createButtonEx("div", "ext_editmode_btn_minus", container, onclickCommand.replace(/%%/g, "-1"), "-1")
+
+            createButtonEx("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+1"), "+1")
+            createButtonEx("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+5"), "+5")
         }
-    }else{
-        editmodeButton.innerText="进入编辑分数模式"
+    } else {
+        editmodeButton.textContent = "进入编辑分数模式"
         for (let index = 0; index < 4; index++) {
-            var editmodeContainers=document.getElementsByClassName("ext_editmode_container")
+            var editmodeContainers = document.getElementsByClassName("ext_editmode_container")
             for (let index = 0; index < editmodeContainers.length; index++) {
                 const element = editmodeContainers[index];
                 element.remove()
             }
-            if(document.getElementsByClassName("ext_editmode_container").length==0) break;
+            if (document.getElementsByClassName("ext_editmode_container").length == 0) break;
         }
     }
-    document.ext_editmode=!document.ext_editmode
+    document.ext_editmode = !document.ext_editmode
 }
 
 function hideButton() {
@@ -93,13 +94,13 @@ function classrankButton() {
     document.ext_functions_getRank(null, function (_) { })
 }
 function fullscoreButton() {
-    
+
     document.ext_functions_report_detail({
         type: "FullMarkCallback",
         image_url: {
-            "default":chrome.runtime.getURL("images/fullmark_analyse_9.png"),
-            "6":chrome.runtime.getURL("images/fullmark_analyse_6.png"),
-            "9":chrome.runtime.getURL("images/fullmark_analyse_9.png")
+            "default": chrome.runtime.getURL("images/fullmark_analyse_9.png"),
+            "6": chrome.runtime.getURL("images/fullmark_analyse_6.png"),
+            "9": chrome.runtime.getURL("images/fullmark_analyse_9.png")
         },
         scoreRanks: [
             chrome.runtime.getURL("images/full_scoreRank_1.png"),

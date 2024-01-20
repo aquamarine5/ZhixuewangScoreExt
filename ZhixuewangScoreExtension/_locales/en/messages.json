@@ -15,6 +15,6 @@
         "message":"There are no available hexagonal charts (playing level subject diagnostics), possibly because not all full subject results are available."
     },
     "btn_url_error":{
-        "message":"Please use this plugin on the view full results page."
+        "message":"The current page is not the Zhixuewang Grade Reporting page (the link that starts with www.zhixue.com/activitystudy/web-report), so please check to see if you are calling from the correct page!"
     }
 }

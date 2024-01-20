@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 })
 function getRank(request, sendResponse) {
     if (window.location.href.match("www.zhixue.com/activitystudy/web-report") == null) {
-        sendResponse({ "status": 1, "message": "当前页面不是智学网成绩报告页面（开头为www.zhixue.com/activitystudy/web-report 的链接），请检查是否在正确的页面调用。\nThe current page is not the Zhixuewang Grade Reporting page (the link that starts with www.zhixue.com/activitystudy/web-report), so please check to see if you are calling from the correct page!" })
+        sendResponse({ "status": 1, "message": chrome.i18n.getMessage("btn_url_error") })
     }
     var examId = sessionStorage.getItem('zxbReportExamId')
     var http = new XMLHttpRequest()
@@ -57,7 +57,7 @@ function getRank(request, sendResponse) {
                         bold.appendChild(s)
                         var f = document.createElement('span')
                         f.setAttribute("style", "font-weight: 700; color:#1473e5;")
-                        f.className="ext_classrank"
+                        f.className = "ext_classrank"
                         f.textContent = Math.ceil(list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toString() + "( " + (list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toFixed(1) + " )"
                         if (list[decodeURIComponent(subjectName)] == 0) f.textContent = "1 ( first )"
                         bold.appendChild(f)
@@ -92,40 +92,49 @@ function original_roll_detail(request, sendResponse) {
     sendResponse({ "status": 0, "message": "成功。\nSuccess." })
 }
 
-function tryRemove(object,length){
-    object=$(object)
-    if(!object) return
-    if(length!=undefined){ if(object[length]) object[length].remove()}
+function tryRemove(object, length) {
+    object = $(object)
+    if (!object) return
+    if (length != undefined) { if (object[length]) object[length].remove() }
     else object.remove()
 }
 function report_detail_v2(request, sendResponse) {
     function change_full_score() {
         // 单科成绩或全科总成绩
         edit_class_rank()
-        if ($(".general span.specific")[0] != undefined) var head = ".general "
-        else var head = ""
-        var fullscore = $(head + "span.specific")[0].textContent.match(/(\d+\.?\d?)/g)[0];
-        var fullscore_position = $(head + "span.increase")[0]
+        const subjectScore = $("div.single div.sub-item")
+        if ($(".general span.specific")[0] != undefined) {
+            var fullscore = 0
+            for (let index = 0; index < subjectScore.length; index++) {
+                const element = subjectScore[index];
+                fullscore += parseInt(element.getElementsByClassName("specific")[0].textContent.replace("/", ""))
+            }
+            var fullscore_position = $(".general span.increase")[0]
+            $(".general span.specific")[0].textContent="满分 "+fullscore.toString()
+        }
+        else {
+            var fullscore = $("span.specific")[0].textContent.match(/(\d+\.?\d?)/g)[0];
+            var fullscore_position = $("span.increase")[0]
+        }
         fullscore_position.textContent = fullscore_position.textContent.replace(/(\d+\.?\d?)/g, fullscore)
         // 全科成绩的分成绩
-        const subjectScore = $("div.single div.sub-item")
         for (let index = 0; index < subjectScore.length; index++) {
             const element = subjectScore[index];
             element.getElementsByClassName("blue")[0].textContent = element.getElementsByClassName("specific")[0].textContent.match(/(\d+\.?\d?)/g)[0]
         }
     }
-    function edit_class_rank(){
+    function edit_class_rank() {
 
         const predictedClassRank = document.getElementsByClassName("ext_classrank")
         for (let index = 0; index < predictedClassRank.length; index++) {
-            predictedClassRank[index].textContent="1 ( first )"
+            predictedClassRank[index].textContent = "1 ( first )"
         }
     }
     function edit_container_0() { }
     function edit_container_2() {
         tryRemove(".container-backgrounde[index='2'] .class-score-level-selected-exam-name", 0)
         tryRemove(".container-backgrounde[index='2'] canvas")
-        $(".container-backgrounde[index='2'] .class-running")[0].setAttribute("style", "left: 50.8114514%;")
+        $(".container-backgrounde[index='2'] .class-running")[0].setAttribute("style", "left: 99.9%;")
         const levelpoints = $(".container-backgrounde[index='2'] .class-score-level-point-tag")
         const levelpopup = $(".container-backgrounde[index='2'] .class-score-level-popup")
         const levelwappers = $(".container-backgrounde[index='2'] .class-score-level-tag-container")
@@ -143,12 +152,11 @@ function report_detail_v2(request, sendResponse) {
     function edit_container_3() {
         tryRemove($(".subject_analysis"), 0)
         var img = document.createElement("img");
-        var subjectCount=$(".hierarchy .single div.sub-item").length
-        var index=request.image_url.indexOf(subjectCount.toString())
-        if(index==-1){
+        var subjectCount = $(".hierarchy .single div.sub-item").length
+        if (!request.image_url.hasOwnProperty(subjectCount.toString())) {
             img.setAttribute('src', request.image_url["default"])
         }
-        else{
+        else {
             img.setAttribute('src', request.image_url[subjectCount.toString()])
         }
         $(".subject_analysis_div")[0].appendChild(img)
