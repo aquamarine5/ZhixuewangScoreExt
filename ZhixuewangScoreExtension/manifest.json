@@ -1,6 +1,6 @@
 {
   "name": "__MSG_PACKAGE_NAME__",
-  "version": "1.12",
+  "version": "1.14",
   "manifest_version": 3,
   "description": "用于在智学网成绩报告页面快速更改为满分的插件",
   "default_locale": "zh",

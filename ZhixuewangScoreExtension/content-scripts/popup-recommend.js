@@ -36,6 +36,9 @@ function execPopupRecommend() {
         hide_button.onclick = hideButton
         classrank_button.onclick = classrankButton
         fullscore_button.onclick = fullscoreButton
+        var douyin_button=createElementEx("div","ext_recommend_button", text_div)
+        douyin_button.innerText="看看作者的抖音"
+        douyin_button.onclick=function(){window.open("https://www.douyin.com/user/MS4wLjABAAAApuyqymIaQkpvKkbdH1X6W3A6XEgJl7kddGrZHxipJ7TbA1lCRaPJK5gZ1KX7pR1n")}
         var tips = createElementEx("div", "ext_recommend_tips", recommend_div)
         var version = chrome.runtime.getManifest().version
         tips.innerText = "插件功能由 ZhixuewangScoreExt(v" + version + ") 提供，并非官方提供的功能。 @海蓝色的咕咕鸽 (@aquamarine5, RenegadeCreation)"

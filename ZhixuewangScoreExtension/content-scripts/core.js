@@ -58,7 +58,7 @@ function getRank(request, sendResponse) {
                         var f = document.createElement('span')
                         f.setAttribute("style", "font-weight: 700; color:#1473e5;")
                         f.className = "ext_classrank"
-                        f.textContent = Math.ceil(list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toString() + "( " + (list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toFixed(1) + " )"
+                        f.textContent = Math.ceil(list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toString()// + "( " + (list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toFixed(1) + " )"
                         if (list[decodeURIComponent(subjectName)] == 0) f.textContent = "1 ( first )"
                         bold.appendChild(f)
                     }
@@ -107,10 +107,12 @@ function report_detail_v2(request, sendResponse) {
             var fullscore = 0
             for (let index = 0; index < subjectScore.length; index++) {
                 const element = subjectScore[index];
+                var score = parseInt(element.getElementsByClassName("specific")[0].textContent.replace("/", ""))
+                if (score == NaN) continue;
                 fullscore += parseInt(element.getElementsByClassName("specific")[0].textContent.replace("/", ""))
             }
             var fullscore_position = $(".general span.increase")[0]
-            $(".general span.specific")[0].textContent="满分 "+fullscore.toString()
+            $(".general span.specific")[0].textContent = "满分 " + fullscore.toString()
         }
         else {
             var fullscore = $("span.specific")[0].textContent.match(/(\d+\.?\d?)/g)[0];
@@ -127,7 +129,7 @@ function report_detail_v2(request, sendResponse) {
 
         const predictedClassRank = document.getElementsByClassName("ext_classrank")
         for (let index = 0; index < predictedClassRank.length; index++) {
-            predictedClassRank[index].textContent = "1 ( first )"
+            predictedClassRank[index].textContent = "1"
         }
     }
     function edit_container_0() { }
