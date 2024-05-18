@@ -5,6 +5,7 @@
 [![Release date](https://img.shields.io/github/release-date-pre/aquamarine5/ZhixuewangScoreExt)]()
 [![Download count](https://img.shields.io/github/downloads/aquamarine5/ZhixuewangScoreExt/total)]()
 ![image.png](https://s2.loli.net/2022/05/22/4Ze5j3ysloSVCGn.png)
+![image.png](https://s2.loli.net/2024/05/19/bIS4BwxtVlgUQRy.png)
   
 ## **如有不更改或新内容请提issues or prs, thanks~**
 - 用于在智学网成绩报告页面以及考试原卷页面快速更改为满分的插件
