@@ -14,7 +14,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     }
 })
 function getRank(request, sendResponse) {
-    if (window.location.href.match("www.zhixue.com/activitystudy/web-report") == null) {
+    if (document.ext_label_classRank == undefined) {
+        document.ext_label_classRank = true
+    } else {
+        return
+    }
+    if (window.location.href.match("www\.zhixue.com/activitystudy/web-report") == null) {
         sendResponse({ "status": 1, "message": chrome.i18n.getMessage("btn_url_error") })
     }
     var examId = sessionStorage.getItem('zxbReportExamId')
@@ -56,10 +61,11 @@ function getRank(request, sendResponse) {
                         s.textContent = " 估算班排  "
                         bold.appendChild(s)
                         var f = document.createElement('span')
+                        var num = Math.ceil(list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toString()
                         f.setAttribute("style", "font-weight: 700; color:#1473e5;")
                         f.className = "ext_classrank"
-                        f.textContent = Math.ceil(list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toString()// + "( " + (list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toFixed(1) + " )"
-                        if (list[decodeURIComponent(subjectName)] == 0) f.textContent = "1"
+                        f.textContent = num + getEmojiOfClassRank(num, classTotalNumber)
+                        if (list[decodeURIComponent(subjectName)] == 0) f.textContent = "1 👑"
                         bold.appendChild(f)
                     }
                 }
@@ -67,6 +73,17 @@ function getRank(request, sendResponse) {
         }
     }
     sendResponse({ "status": 0, "message": "成功。\nSuccess." })
+}
+function getEmojiOfClassRank(current, all) {
+    var d = current / all
+    if (current == -1) return "👑"
+    if (1 <= current <= 3) return "🎉"
+    if (0 <= d <= 0.2) return "👍"
+    if (0.2 <= d <= 0.5) return "😊"
+    if (0.5 <= d <= 0.7) return "🤨"
+    if (0.7 <= d <= 0.9) return "🤔"
+    if (current == all) return "🤣"
+    return "🙁"
 }
 function original_roll_detail(request, sendResponse) {
     let scoretext = document.getElementsByClassName("total-score-text")[0];
@@ -129,7 +146,7 @@ function report_detail_v2(request, sendResponse) {
 
         const predictedClassRank = document.getElementsByClassName("ext_classrank")
         for (let index = 0; index < predictedClassRank.length; index++) {
-            predictedClassRank[index].textContent = "1"
+            predictedClassRank[index].textContent = "1 👑"
         }
     }
     function edit_container_0() { }
@@ -187,7 +204,7 @@ function report_detail_v2(request, sendResponse) {
 
 function execZhixuewangAction(request, sendResponse) {
 
-    if (window.location.href.match("www.zhixue.com/activitystudy/web-report") == null) {
+    if (window.location.href.match("www\.zhixue.com/activitystudy/web-report") == null) {
         sendResponse({ "status": 1, "message": "当前页面不是智学网成绩报告页面（开头为www.zhixue.com/activitystudy/web-report 的链接），请检查是否在正确的页面调用。\nThe current page is not the Zhixuewang Grade Reporting page (the link that starts with www.zhixue.com/activitystudy/web-report), so please check to see if you are calling from the correct page!" })
     }
     if (document.location.href.search("report-detail") != -1) {

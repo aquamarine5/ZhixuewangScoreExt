@@ -69,10 +69,12 @@ function editModeButton() {
         for (let index = 0; index < subjectItems.length; index++) {
             const element = subjectItems[index];
             var container = createElementEx("div", "ext_editmode_container", element)
-            var onclickCommand = "var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseInt(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseInt(g.textContent)%%"
+            
+            var onclickCommand = "var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseFloat(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseFloat(g.textContent)%%"
             createButtonEx("div", "ext_editmode_btn_minus", container, onclickCommand.replace(/%%/g, "-5"), "-5")
             createButtonEx("div", "ext_editmode_btn_minus", container, onclickCommand.replace(/%%/g, "-1"), "-1")
 
+            createButtonEx("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+0.5"), "+0.5")
             createButtonEx("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+1"), "+1")
             createButtonEx("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+5"), "+5")
         }
@@ -98,7 +100,6 @@ function classrankButton() {
     document.ext_functions_getRank(null, function (_) { })
 }
 function fullscoreButton() {
-
     document.ext_functions_report_detail({
         type: "FullMarkCallback",
         image_url: {
