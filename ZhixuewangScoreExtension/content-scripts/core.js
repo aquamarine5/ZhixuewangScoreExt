@@ -53,18 +53,17 @@ function getRank(request, sendResponse) {
                     for (let index = 0; index < subjectScore.length; index++) {
                         const element = subjectScore[index];
                         const subjectName = encodeURIComponent(element.getElementsByClassName("subject")[0].textContent).replaceAll("%20", "").replaceAll("%0A", "")
-                        console.log(list)
-                        console.log(subjectName)
                         const bold = element.getElementsByClassName("bold-level")[0]
                         var s = document.createElement("span")
                         s.setAttribute("style", "font-weight: normal;")
                         s.textContent = " 估算班排  "
                         bold.appendChild(s)
                         var f = document.createElement('span')
+                        console.log(classTotalNumber)
                         var num = Math.ceil(list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toString()
                         f.setAttribute("style", "font-weight: 700; color:#1473e5;")
                         f.className = "ext_classrank"
-                        f.textContent = num + getEmojiOfClassRank(num, classTotalNumber)
+                        f.textContent = num + " " + getEmojiOfClassRank(num, classTotalNumber)
                         if (list[decodeURIComponent(subjectName)] == 0) f.textContent = "1 👑"
                         bold.appendChild(f)
                     }
@@ -76,12 +75,13 @@ function getRank(request, sendResponse) {
 }
 function getEmojiOfClassRank(current, all) {
     var d = current / all
-    if (current == -1) return "👑"
-    if (1 <= current <= 3) return "🎉"
-    if (0 <= d <= 0.2) return "👍"
-    if (0.2 <= d <= 0.5) return "😊"
-    if (0.5 <= d <= 0.7) return "🤨"
-    if (0.7 <= d <= 0.9) return "🤔"
+    console.log(current)
+    if (current == 1) return "👑"
+    if (current == 2 || current == 3) return "🎉"
+    if (d <= 0.2) return "👍"
+    if (d <= 0.5) return "😊"
+    if (d <= 0.7) return "🤨"
+    if (d <= 0.9) return "🤔"
     if (current == all) return "🤣"
     return "🙁"
 }
