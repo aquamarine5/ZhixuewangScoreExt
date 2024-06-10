@@ -17,6 +17,8 @@ var interval = setInterval(function () {
 function execPopupRecommend() {
     if (checkAllScorePublished()) {
         console.log("a")
+
+        document.ext_functions_plaza()
         var parent_div = document.getElementsByClassName("hierarchy")[0].children[0]
         var recommend_div = createElementEx("div", "ext_recommend_div", parent_div)
         var text_div = createElementEx("div", "ext_recommend_text", recommend_div)
@@ -70,7 +72,7 @@ function editModeButton() {
             const element = subjectItems[index];
             var container = createElementEx("div", "ext_editmode_container", element)
             
-            var onclickCommand = "var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseFloat(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseFloat(g.textContent)%%"
+            var onclickCommand = "var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseFloat(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseFloat(g.textContent)%%;document.ext_functions_plaza()"
             createButtonEx("div", "ext_editmode_btn_minus", container, onclickCommand.replace(/%%/g, "-5"), "-5")
             createButtonEx("div", "ext_editmode_btn_minus", container, onclickCommand.replace(/%%/g, "-1"), "-1")
 

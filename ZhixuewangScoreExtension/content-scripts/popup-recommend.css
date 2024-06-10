@@ -23,6 +23,30 @@
     transform: translateY(2px);
 }
 
+.ext_loveplaza_button{
+    display: inline-block;
+    padding-block: 6px;
+    padding-inline: 14px;
+    margin-inline: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #14cdc8;
+    border: none;
+    border-radius: 15px;
+}
+.ext_loveplaza_buttonn:hover {
+    background-color: #14cdc8;
+}
+
+.ext_loveplaza_button:active {
+    background-color: #14cdc8;
+    transform: translateY(2px);
+}
+
 .ext_recommend_text {
     padding: 12px;
     color: #37cdbe;
