@@ -9,7 +9,7 @@ var interval = setInterval(function () {
         setTimeout(execPopupRecommend, 1000)
     }
     if (i > 100) {
-        console.warn("try 100 times, clear interval action.")
+        console.log("try 100 times, clear interval action.")
         clearInterval(interval)
         interval = null;
     }
@@ -37,7 +37,7 @@ function execPopupRecommend() {
         classrank_button.onclick = classrankButton
         fullscore_button.onclick = fullscoreButton
         var douyin_button=createElementEx("div","ext_recommend_button", text_div)
-        douyin_button.innerText="看看作者的抖音"
+        douyin_button.innerText="看看作者的抖音 >>"
         douyin_button.onclick=function(){window.open("https://www.douyin.com/user/MS4wLjABAAAApuyqymIaQkpvKkbdH1X6W3A6XEgJl7kddGrZHxipJ7TbA1lCRaPJK5gZ1KX7pR1n")}
         var tips = createElementEx("div", "ext_recommend_tips", recommend_div)
         var version = chrome.runtime.getManifest().version
@@ -47,7 +47,8 @@ function execPopupRecommend() {
 
         github_repo.setAttribute("href", "https://github.com/aquamarine5/ZhixuewangScoreExt")
         github_script.setAttribute("href", "https://github.com/aquamarine5/ZhixuewangScoreExt/blob/main/ZhixuewangScoreExtension/content-scripts/core.js")
-
+        github_repo.setAttribute("target","_blank")
+        github_script.setAttribute("target","_blank")
         github_repo.innerText = "Github 项目地址"
         github_script.innerText = "Github 脚本页面"
 
@@ -68,10 +69,12 @@ function editModeButton() {
         for (let index = 0; index < subjectItems.length; index++) {
             const element = subjectItems[index];
             var container = createElementEx("div", "ext_editmode_container", element)
-            var onclickCommand = "var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseInt(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseInt(g.textContent)%%"
+            
+            var onclickCommand = "var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseFloat(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseFloat(g.textContent)%%"
             createButtonEx("div", "ext_editmode_btn_minus", container, onclickCommand.replace(/%%/g, "-5"), "-5")
             createButtonEx("div", "ext_editmode_btn_minus", container, onclickCommand.replace(/%%/g, "-1"), "-1")
 
+            createButtonEx("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+0.5"), "+0.5")
             createButtonEx("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+1"), "+1")
             createButtonEx("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+5"), "+5")
         }
@@ -97,7 +100,6 @@ function classrankButton() {
     document.ext_functions_getRank(null, function (_) { })
 }
 function fullscoreButton() {
-
     document.ext_functions_report_detail({
         type: "FullMarkCallback",
         image_url: {
