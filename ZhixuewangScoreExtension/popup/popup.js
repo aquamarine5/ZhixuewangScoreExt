@@ -43,3 +43,6 @@ if (rank) {
         })
     }
 }
+
+var version_code=document.getElementsByClassName("version_code")[0]
+version_code.textContent=" v"+chrome.runtime.getManifest().version

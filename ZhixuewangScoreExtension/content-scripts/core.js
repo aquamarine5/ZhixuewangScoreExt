@@ -59,7 +59,7 @@ function getRank(request, sendResponse) {
                         f.setAttribute("style", "font-weight: 700; color:#1473e5;")
                         f.className = "ext_classrank"
                         f.textContent = Math.ceil(list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toString()// + "( " + (list[decodeURIComponent(subjectName)] / 100 * classTotalNumber).toFixed(1) + " )"
-                        if (list[decodeURIComponent(subjectName)] == 0) f.textContent = "1 ( first )"
+                        if (list[decodeURIComponent(subjectName)] == 0) f.textContent = "1"
                         bold.appendChild(f)
                     }
                 }
