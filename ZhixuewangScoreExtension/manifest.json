@@ -21,8 +21,6 @@
       ],
       "js": [
         "libs/jquery-3.6.0.min.js",
-        "libs/d3.min.js",
-        "libs/function-plot.js",
         "content-scripts/loveplaza.js",
         "content-scripts/core.js",
         "content-scripts/popup-recommend.js"

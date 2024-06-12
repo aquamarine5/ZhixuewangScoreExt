@@ -17,13 +17,6 @@ function showButton(){
 function onButtonClick(){
     document.getElementsByClassName("ext_loveplaza_button")[0].remove()
     cleanupLayout()
-    functionPlot({
-        target:".hierarchy div.single",
-        grid:true,
-        data:[{
-            fn:"x^(2/3)+0.9*sqrt(9-x)*sin(10*3.14*x)"
-        }]
-    })
 }
 function cleanupLayout(){
     $(".general span.specific")[0].remove()
