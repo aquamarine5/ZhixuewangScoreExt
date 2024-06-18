@@ -125,7 +125,7 @@ function report_detail_v2(request, sendResponse) {
             for (let index = 0; index < subjectScore.length; index++) {
                 const element = subjectScore[index];
                 var score = parseInt(element.getElementsByClassName("specific")[0].textContent.replace("/", ""))
-                if (score == NaN) continue;
+                if (isNaN(score)) continue;
                 fullscore += parseInt(element.getElementsByClassName("specific")[0].textContent.replace("/", ""))
             }
             var fullscore_position = $(".general span.increase")[0]
