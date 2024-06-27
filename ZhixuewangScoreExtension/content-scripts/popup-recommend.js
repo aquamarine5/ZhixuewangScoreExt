@@ -1,26 +1,29 @@
 var i = 0;
-var interval = setInterval(function () {
-    i++;
-    console.log(i)
-    if (document.getElementsByClassName("hierarchy").length != 0) {
-        console.log("Load successfully!")
-        clearInterval(interval)
-        interval = null;
-        setTimeout(execPopupRecommend, 1000)
-    }
-    if (i > 100) {
-        console.log("try 100 times, clear interval action.")
-        clearInterval(interval)
-        interval = null;
-    }
-}, 100)
+var interval = setupInterval()
+function setupInterval(){
+    return setInterval(function () {
+        i++;
+        console.log(i)
+        if (document.getElementsByClassName("hierarchy").length != 0) {
+            console.log("Load successfully!")
+            clearInterval(interval)
+            interval = null;
+            setTimeout(execPopupRecommend, 1000)
+        }
+        if (i > 100) {
+            console.log("try 100 times, clear interval action.")
+            clearInterval(interval)
+            interval = null;
+        }
+    }, 100)
+}
 function execPopupRecommend() {
     if (checkAllScorePublished()) {
-        console.log("a")
-
         document.ext_functions_plaza()
-        var parent_div = document.getElementsByClassName("hierarchy")[0].children[0]
-        var recommend_div = createElementEx("div", "ext_recommend_div", parent_div)
+        var parent_div = document.getElementsByClassName("hierarchy")[0]
+        var recommend_div = document.createElement("div")
+        recommend_div.className="ext_recommend_div"
+        parent_div.after(recommend_div)
         var text_div = createElementEx("div", "ext_recommend_text", recommend_div)
         text_div.innerText = "需要智学网插件的帮助吗？"
         var classrank_button = createElementEx("div", "ext_recommend_button", text_div)
@@ -46,14 +49,20 @@ function execPopupRecommend() {
         tips.innerText = "插件功能由 ZhixuewangScoreExt(v" + version + ") 提供，并非官方提供的功能。 @海蓝色的咕咕鸽 (@aquamarine5, RenegadeCreation)"
         var github_repo = createElementEx("a", "ext_recommend_link", tips)
         var github_script = createElementEx("a", "ext_recommend_link", tips)
-
         github_repo.setAttribute("href", "https://github.com/aquamarine5/ZhixuewangScoreExt")
         github_script.setAttribute("href", "https://github.com/aquamarine5/ZhixuewangScoreExt/blob/main/ZhixuewangScoreExtension/content-scripts/core.js")
         github_repo.setAttribute("target","_blank")
         github_script.setAttribute("target","_blank")
         github_repo.innerText = "Github 项目地址"
         github_script.innerText = "Github 脚本页面"
-
+        var dropdownlist=$(".el-select-dropdown__list li")
+        for (let index = 0; index < dropdownlist.length; index++) {
+            const element = dropdownlist[index];
+            element.onclick=function(){
+                clearInterval(interval)
+                interval=setupInterval()
+            }
+        }
     }
 }
 function editModeButton() {

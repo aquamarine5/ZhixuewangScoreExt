@@ -1,0 +1,52 @@
+<math xmlns='http://www.w3.org/1998/Math/MathML' id="ext_loveplaza_math">
+  <mi> f </mi>
+  <mrow>
+    <mo> ( </mo>
+      <mi> x </mi>
+    <mo> ) </mo>
+  </mrow>
+  <mo> = </mo>
+  <msup>
+    <mrow>
+      <mi> x </mi>
+    </mrow>
+    <mrow>
+      <mfrac>
+        <mrow>
+          <mn> 2 </mn>
+        </mrow>
+        <mrow>
+          <mn> 3 </mn>
+        </mrow>
+      </mfrac>
+    </mrow>
+  </msup>
+  <mo> + </mo>
+  <mn> 0.9 </mn>
+  <msqrt>
+    <mn> 9 </mn>
+    <mo> - </mo>
+    <msup>
+      <mrow>
+        <mi> x </mi>
+      </mrow>
+      <mrow>
+        <mn> 2 </mn>
+      </mrow>
+    </msup>
+  </msqrt>
+  <mi> sin </mi>
+  <mrow>
+    <mo> ( </mo>
+      <mfrac>
+        <mrow>
+          <mn> 521 </mn>
+        </mrow>
+        <mrow>
+          <mi> &#x03C0; <!-- greek small letter pi --> </mi>
+        </mrow>
+      </mfrac>
+      <mi> x </mi>
+    <mo> ) </mo>
+  </mrow>
+</math>

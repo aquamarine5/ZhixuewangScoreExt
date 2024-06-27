@@ -26,17 +26,18 @@
         "content-scripts/popup-recommend.js"
       ],
       "css": [
-        "content-scripts/popup-recommend.css"
+        "content-scripts/zhixuewang-ext.css"
       ]
     }
   ],
   "web_accessible_resources": [
     {
       "resources": [
-        "/images/*.png"
+        "/images/*.png",
+        "/fonts/*.woff2"
       ],
       "matches": [
-        "<all_urls>"
+        "https://www.zhixue.com/*"
       ]
     }
   ]

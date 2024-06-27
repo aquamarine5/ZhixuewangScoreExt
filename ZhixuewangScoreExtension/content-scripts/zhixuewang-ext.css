@@ -107,3 +107,10 @@
 .ext_editmode_container{
     margin-left: 75px;
 }
+
+.ext_recommend_div{
+    background-color: #fff;
+    font-size: 18px;
+    padding-left: 28px;
+    padding-bottom: 20px;
+}
