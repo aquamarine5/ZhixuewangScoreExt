@@ -34,7 +34,7 @@
     {
       "resources": [
         "/images/*.png",
-        "/fonts/*.woff2"
+        "/fonts/*.*"
       ],
       "matches": [
         "https://www.zhixue.com/*"

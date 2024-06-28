@@ -26,8 +26,8 @@ function onButtonClick() {
     image.setAttribute("src",chrome.runtime.getURL("images/loveplaza_pt1.png"))
     var fontStyle=createElementEx("style","ext_loveplaza_font",$("div.hierarchy")[0].children[0])
     fontStyle.textContent="mi{font-family: KaTeX_Math;}mo mn{font-family: KaTeX_Main;}"+
-        "@font-face {font-family: KaTeX_Main; src: url("+chrome.runtime.getURL("KaTeX_Main-Regular.woff2")+") format(\"woff2\"); font-weight: 400; font-style: normal}"+
-        "@font-face {font-family: KaTeX_Math; src: url("+chrome.runtime.getURL("KaTeX_Math-Italic.woff2")+") format(\"woff2\"); font-weight: 400; font-style: italic}"
+        "@font-face {font-family: KaTeX_Main; src: url("+chrome.runtime.getURL("fonts/KaTeX_Main-Regular.woff2")+") format(\"woff2\"); font-weight: 400; font-style: normal}"+
+        "@font-face {font-family: KaTeX_Math; src: url("+chrome.runtime.getURL("fonts/KaTeX_Math-Italic.woff2")+") format(\"woff2\"); font-weight: 400; font-style: italic}"
     var formula=createElementEx("div","ext_loveplaza_formula",$("div.hierarchy")[0].children[0])
     formula.innerHTML="<math xmlns='http://www.w3.org/1998/Math/MathML' style='font-family: KaTeX_Main'>  <mi> f </mi>\n  <mrow>\n    <mo> ( </mo>\n      <mi> x </mi>\n    <mo> ) </mo>\n  </mrow>\n  <mo> = </mo>\n  <msup>\n    <mrow>\n      <mi> x </mi>\n    </mrow>\n    <mrow>\n      <mfrac>\n        <mrow>\n          <mn> 2 </mn>\n        </mrow>\n        <mrow>\n          <mn> 3 </mn>\n        </mrow>\n      </mfrac>\n    </mrow>\n  </msup>\n  <mo> + </mo>\n  <mn> 0.9 </mn>\n  <msqrt>\n    <mn> 9 </mn>\n    <mo> - </mo>\n    <msup>\n      <mrow>\n        <mi> x </mi>\n      </mrow>\n      <mrow>\n        <mn> 2 </mn>\n      </mrow>\n    </msup>\n  </msqrt>\n  <mi> sin </mi>\n  <mrow>\n    <mo> ( </mo>\n      <mfrac>\n        <mrow>\n          <mn> 521 </mn>\n        </mrow>\n        <mrow>\n          <mi> &#x03C0; \x3C!-- greek small letter pi --> </mi>\n        </mrow>\n      </mfrac>\n      <mi> x </mi>\n    <mo> ) </mo>\n  </mrow>\n</math>\n"
 }
