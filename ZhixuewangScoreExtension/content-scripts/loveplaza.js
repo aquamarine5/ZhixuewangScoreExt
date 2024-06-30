@@ -37,14 +37,25 @@ function onButtonClick() {
     var progressContainer = createElementEx("div", "ext_loveplaza_progress_container", $("div.hierarchy")[0].children[0])
     var progressBar = createElementEx("div", "ext_loveplaza_progress_bar", progressContainer)
     progressBar.setAttribute("style", "--progress: 0%;")
+    setTimeout(onAnimatedFrame,1000,0,5)
 }
 function onAnimatedFrame(i, maxIndex) {
-    if (i == maxIndex) return
     var image = $(".ext_loveplaza_img")[0]
     var score = $(".ext_loveplaza_score")[0]
     var progerssBar = $(".ext_loveplaza_progress_bar")[0]
-    var subject = $(".single .sub-item")[0].children[i]
+    var subject = $(".sub-item")[i]
+    console.log(subject)
     score.textContent=parseFloat(score.textContent)+parseFloat(subject.getElementsByClassName("blue")[0].textContent)
+    image.setAttribute("src",chrome.runtime.getURL("images/loveplaza_pt"+(i+1).toString()+".png"))
+    if (i == maxIndex){
+        onAnimateEnded()
+        return
+    }
+    else
+        setTimeout(onAnimatedFrame,1000,i+1,maxIndex)
+}
+function onAnimateEnded(){
+
 }
 function cleanupLayout() {
     $(".general span.specific")[0].remove()
