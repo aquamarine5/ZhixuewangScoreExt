@@ -22,7 +22,9 @@
     background-color: #14cdc8;
     transform: translateY(2px);
 }
-
+.ext_loveplaza_score{
+    padding-block: 2px;
+}
 .ext_loveplaza_button{
     display: inline-block;
     padding-block: 6px;
@@ -45,6 +47,20 @@
 .ext_loveplaza_button:active {
     background-color: #14cdc8;
     transform: translateY(2px);
+}
+
+.ext_loveplaza_progress_container{
+    border-radius: 25px;
+    background: #eee;
+}
+
+.ext_loveplaza_progress_bar{
+    width: var(--progress);
+    height: inherit;
+    border-radius: 25px 0 0 25px;
+    background: #0f0;
+    transition: width .2s;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .ext_recommend_text {
