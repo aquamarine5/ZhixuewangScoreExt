@@ -33,11 +33,11 @@ function onButtonClick() {
         "<mi> f </mi>  <mrow>    <mo> ( </mo><mi> x </mi>    <mo> ) </mo>  </mrow>  <mo> = </mo>" +
         "<msup>    <mrow><mi> x </mi>    </mrow>    <mrow><mfrac><mrow>  <mn> 2 </mn></mrow><mrow>  <mn> 3 </mn></mrow></mfrac>    </mrow>  </msup>" +
         "<mo> + </mo>  <mn> 0.9 </mn>  <msqrt>    <mn> 9 </mn>    <mo> - </mo>    <msup><mrow><mi> x </mi></mrow><mrow><mn> 2 </mn></mrow>    </msup>  </msqrt>  " +
-        "<mi> sin </mi>  <mrow>    <mo> ( </mo><mfrac><mrow>  <mn class='ext_loveplaza_score'> 521 </mn></mrow><mrow>  <mi style='padding-block: 2px;'> &#x03C0;  </mi></mrow></mfrac><mi> x </mi>    <mo> ) </mo>  </mrow></math>"
+        "<mi> sin </mi>  <mrow>    <mo> ( </mo><mfrac><mrow>  <mn class='ext_loveplaza_score'> 0 </mn></mrow><mrow>  <mi style='padding-block: 2px;'> &#x03C0;  </mi></mrow></mfrac><mi> x </mi>    <mo> ) </mo>  </mrow></math>"
     var progressContainer = createElementEx("div", "ext_loveplaza_progress_container", $("div.hierarchy")[0].children[0])
     var progressBar = createElementEx("div", "ext_loveplaza_progress_bar", progressContainer)
     progressBar.setAttribute("style", "--progress: 0%;")
-    setTimeout(onAnimatedFrame,1000,0,5)
+    onAnimatedFrame(0,5)
 }
 function onAnimatedFrame(i, maxIndex) {
     var image = $(".ext_loveplaza_img")[0]

@@ -48,7 +48,9 @@
     background-color: #14cdc8;
     transform: translateY(2px);
 }
-
+.ext_loveplaza_formula{
+    padding-bottom: 15px;
+}
 .ext_loveplaza_progress_container{
     border-radius: 25px;
     background: #eee;
@@ -56,7 +58,7 @@
 
 .ext_loveplaza_progress_bar{
     width: var(--progress);
-    height: inherit;
+    height: 15px;
     border-radius: 25px 0 0 25px;
     background: #0f0;
     transition: width .2s;
