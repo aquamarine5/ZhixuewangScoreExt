@@ -51,12 +51,20 @@
 .ext_loveplaza_formula{
     padding-bottom: 15px;
 }
+.ext_loveplaza_progress_div{
+    padding: 10px;
+    padding-left: 0px;
+    z-index: 1;
+}
+
 .ext_loveplaza_progress_container{
     border-radius: 25px;
     background: #eee;
+    z-index: 1;
 }
 
 .ext_loveplaza_progress_bar{
+    z-index: 1;
     width: var(--progress);
     height: 15px;
     border-radius: 25px 0 0 25px;
@@ -64,7 +72,14 @@
     transition: width .2s;
     transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 }
-
+.ext_loveplaza_copyright{
+    font-size: small;
+    color:#8c8c8c;
+}
+.ext_loveplaza_maltese{
+    width: var(--progress);
+    z-index: 2;
+}
 .ext_recommend_text {
     padding: 12px;
     color: #37cdbe;

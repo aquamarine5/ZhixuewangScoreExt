@@ -13,6 +13,7 @@ function checkButtonDisplayBuiltin() {
     checkButtonDisplay(parseInt($(".general span.increase")[0].textContent))
 }
 function showButton() {
+    $(".general span.specific")[0].remove()
     $("span.bold")[0].setAttribute("style", "margin-right: revert;")
     var button = createElementEx("div", "ext_loveplaza_button", $("span.bold")[0])
     button.textContent = "❤️🎉"
@@ -22,22 +23,28 @@ function onButtonClick() {
     document.getElementsByClassName("ext_loveplaza_button")[0].remove()
     cleanupLayout()
     $("div.hierarchy")[0].setAttribute("style", "display: flex; justift-content: space-around; ")
+    var parent=$("div.hierarchy")[0].children[0]
     var image = createElementEx("img", "ext_loveplaza_img", $("div.hierarchy")[0])
-    image.setAttribute("src", chrome.runtime.getURL("images/loveplaza_pt1.png"))
-    var fontStyle = createElementEx("style", "ext_loveplaza_font", $("div.hierarchy")[0].children[0])
+    image.setAttribute("src", chrome.runtime.getURL("images/loveplaza_pt0.png"))
+    var fontStyle = createElementEx("style", "ext_loveplaza_font", parent)
     fontStyle.textContent = "mi{font-family: KaTeX_Math;}mo mn{font-family: KaTeX_Main;}math{font-size: larger;}" +
         "@font-face {font-family: KaTeX_Main; src: url(" + chrome.runtime.getURL("fonts/KaTeX_Main-Regular.woff2") + ") format(\"woff2\"); font-weight: 400; font-style: normal}" +
         "@font-face {font-family: KaTeX_Math; src: url(" + chrome.runtime.getURL("fonts/KaTeX_Math-Italic.woff2") + ") format(\"woff2\"); font-weight: 400; font-style: italic}"
-    var formula = createElementEx("div", "ext_loveplaza_formula", $("div.hierarchy")[0].children[0])
+    var formula = createElementEx("div", "ext_loveplaza_formula", parent)
     formula.innerHTML = "<math xmlns='http://www.w3.org/1998/Math/MathML' style='font-family: KaTeX_Main'>" +
         "<mi> f </mi>  <mrow>    <mo> ( </mo><mi> x </mi>    <mo> ) </mo>  </mrow>  <mo> = </mo>" +
         "<msup>    <mrow><mi> x </mi>    </mrow>    <mrow><mfrac><mrow>  <mn> 2 </mn></mrow><mrow>  <mn> 3 </mn></mrow></mfrac>    </mrow>  </msup>" +
         "<mo> + </mo>  <mn> 0.9 </mn>  <msqrt>    <mn> 9 </mn>    <mo> - </mo>    <msup><mrow><mi> x </mi></mrow><mrow><mn> 2 </mn></mrow>    </msup>  </msqrt>  " +
         "<mi> sin </mi>  <mrow>    <mo> ( </mo><mfrac><mrow>  <mn class='ext_loveplaza_score'> 0 </mn></mrow><mrow>  <mi style='padding-block: 2px;'> &#x03C0;  </mi></mrow></mfrac><mi> x </mi>    <mo> ) </mo>  </mrow></math>"
-    var progressContainer = createElementEx("div", "ext_loveplaza_progress_container", $("div.hierarchy")[0].children[0])
+    var progressDiv = createElementEx("div", "ext_loveplaza_progress_div", parent)
+    var progressContainer=createElementEx("div", "ext_loveplaza_progress_container",progressDiv)
     var progressBar = createElementEx("div", "ext_loveplaza_progress_bar", progressContainer)
     progressBar.setAttribute("style", "--progress: 0%;")
-    onAnimatedFrame(0,5)
+    var maltese=createElementEx("img","ext_loveplaza_maltese",progressDiv)
+    maltese.setAttribute("src",chrome.runtime.getURL("images/loveplaza_maltese.png"))
+    var copyright=createElementEx("span","ext_loveplaza_copyright",parent)
+    copyright.textContent="Illustration from © MALTESE, Designed by LovePlaza 2024, RC."
+    setTimeout(onAnimatedFrame,1000,0,5)
 }
 function onAnimatedFrame(i, maxIndex) {
     var image = $(".ext_loveplaza_img")[0]
@@ -47,6 +54,7 @@ function onAnimatedFrame(i, maxIndex) {
     console.log(subject)
     score.textContent=parseFloat(score.textContent)+parseFloat(subject.getElementsByClassName("blue")[0].textContent)
     image.setAttribute("src",chrome.runtime.getURL("images/loveplaza_pt"+(i+1).toString()+".png"))
+    progerssBar.setAttribute("style","--progress:"+((score.textContent/520)*100).toFixed(3)+"%;")
     if (i == maxIndex){
         onAnimateEnded()
         return
@@ -58,7 +66,6 @@ function onAnimateEnded(){
 
 }
 function cleanupLayout() {
-    $(".general span.specific")[0].remove()
     $(".single")[0].setAttribute("style", "max-width: 488px; ")
     $(".general")[0].setAttribute("style", "border-bottom: revert; max-width:488px; ")
     var subjectItems = $("div.sub-item")
