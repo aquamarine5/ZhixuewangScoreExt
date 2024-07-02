@@ -52,7 +52,7 @@ function onAnimatedFrame(i, maxIndex) {
     var score = $(".ext_loveplaza_score")[0]
     var progerssBar = $(".ext_loveplaza_progress_bar")[0]
     var subject = $(".sub-item")[i]
-    console.log("onAnimatedFrame: "+i.toString())
+    console.log("onAnimatedFrame: "+(i+1).toString())
     score.textContent=parseFloat(score.textContent)+parseFloat(subject.getElementsByClassName("blue")[0].textContent)
     image.setAttribute("src",chrome.runtime.getURL("images/loveplaza_pt"+(i+1).toString()+".png"))
     var step=((score.textContent/520)*100).toFixed(3)
