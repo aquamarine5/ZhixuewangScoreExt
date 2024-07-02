@@ -19,7 +19,7 @@ function getRank(request, sendResponse) {
     } else {
         return
     }
-    if (window.location.href.match("www\.zhixue.com/activitystudy/web-report") == null) {
+    if (window.location.href.match("zhixue.com/activitystudy/web-report") == null) {
         sendResponse({ "status": 1, "message": chrome.i18n.getMessage("btn_url_error") })
     }
     var examId = sessionStorage.getItem('zxbReportExamId')
@@ -204,7 +204,7 @@ function report_detail_v2(request, sendResponse) {
 
 function execZhixuewangAction(request, sendResponse) {
 
-    if (window.location.href.match("www\.zhixue.com/activitystudy/web-report") == null) {
+    if (window.location.href.match("zhixue.com/activitystudy/web-report") == null) {
         sendResponse({ "status": 1, "message": "当前页面不是智学网成绩报告页面（开头为www.zhixue.com/activitystudy/web-report 的链接），请检查是否在正确的页面调用。\nThe current page is not the Zhixuewang Grade Reporting page (the link that starts with www.zhixue.com/activitystudy/web-report), so please check to see if you are calling from the correct page!" })
     }
     if (document.location.href.search("report-detail") != -1) {
