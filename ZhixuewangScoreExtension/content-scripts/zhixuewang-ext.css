@@ -22,7 +22,64 @@
     background-color: #14cdc8;
     transform: translateY(2px);
 }
+.ext_loveplaza_score{
+    padding-block: 2px;
+}
+.ext_loveplaza_button{
+    display: inline-block;
+    padding-block: 6px;
+    padding-inline: 14px;
+    margin-inline: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #14cdc8;
+    border: none;
+    border-radius: 15px;
+}
+.ext_loveplaza_button:hover {
+    background-color: #14cdc8;
+}
 
+.ext_loveplaza_button:active {
+    background-color: #14cdc8;
+    transform: translateY(2px);
+}
+.ext_loveplaza_formula{
+    padding-bottom: 15px;
+}
+.ext_loveplaza_progress_div{
+    padding: 10px;
+    padding-left: 0px;
+    z-index: 1;
+}
+
+.ext_loveplaza_progress_container{
+    border-radius: 25px;
+    background: #eee;
+    z-index: 1;
+}
+
+.ext_loveplaza_progress_bar{
+    z-index: 1;
+    width: var(--progress);
+    height: 15px;
+    border-radius: 25px 0 0 25px;
+    background: #0f0;
+    transition: width .2s;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+.ext_loveplaza_copyright{
+    font-size: small;
+    color:#8c8c8c;
+}
+.ext_loveplaza_maltese{
+    width: var(--progress);
+    z-index: 2;
+}
 .ext_recommend_text {
     padding: 12px;
     color: #37cdbe;
@@ -82,4 +139,11 @@
 
 .ext_editmode_container{
     margin-left: 75px;
+}
+
+.ext_recommend_div{
+    background-color: #fff;
+    font-size: 18px;
+    padding-left: 28px;
+    padding-bottom: 20px;
 }
