@@ -42,6 +42,7 @@ function onButtonClick() {
     progressBar.setAttribute("style", "--progress: 0%;")
     var maltese=createElementEx("img","ext_loveplaza_maltese",progressDiv)
     maltese.setAttribute("src",chrome.runtime.getURL("images/loveplaza_maltese.png"))
+    maltese.setAttribute("style","--step:-7%")
     var copyright=createElementEx("span","ext_loveplaza_copyright",parent)
     copyright.textContent="Illustration from © MALTESE, Designed by LovePlaza 2024, RC."
     setTimeout(onAnimatedFrame,1000,0,5)
@@ -51,10 +52,12 @@ function onAnimatedFrame(i, maxIndex) {
     var score = $(".ext_loveplaza_score")[0]
     var progerssBar = $(".ext_loveplaza_progress_bar")[0]
     var subject = $(".sub-item")[i]
-    console.log(subject)
+    console.log("onAnimatedFrame: "+i.toString())
     score.textContent=parseFloat(score.textContent)+parseFloat(subject.getElementsByClassName("blue")[0].textContent)
     image.setAttribute("src",chrome.runtime.getURL("images/loveplaza_pt"+(i+1).toString()+".png"))
-    progerssBar.setAttribute("style","--progress:"+((score.textContent/520)*100).toFixed(3)+"%;")
+    var step=((score.textContent/520)*100).toFixed(3)
+    progerssBar.setAttribute("style","--progress:"+step+"%;")
+    $(".ext_loveplaza_maltese")[0].setAttribute("style","--step:"+(step-7)+"%;")
     if (i == maxIndex){
         onAnimateEnded()
         return

@@ -1,7 +1,7 @@
 var i = 0;
 var interval = setupInterval()
 function setupInterval(){
-    if(window.location.href.match("www\.zhixue.com/activitystudy/web-report") == null){
+    if(window.location.href.match("/activitystudy/web-report") == null){
         console.log("not web-report page, stopInterval")
         return
     }

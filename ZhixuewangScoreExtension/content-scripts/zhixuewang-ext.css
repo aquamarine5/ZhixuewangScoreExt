@@ -22,10 +22,17 @@
     background-color: #14cdc8;
     transform: translateY(2px);
 }
-.ext_loveplaza_score{
+
+.ext_loveplaza_img {
+    max-height: 400px;
+    max-width: 652px;
+}
+
+.ext_loveplaza_score {
     padding-block: 2px;
 }
-.ext_loveplaza_button{
+
+.ext_loveplaza_button {
     display: inline-block;
     padding-block: 6px;
     padding-inline: 14px;
@@ -40,6 +47,7 @@
     border: none;
     border-radius: 15px;
 }
+
 .ext_loveplaza_button:hover {
     background-color: #14cdc8;
 }
@@ -48,38 +56,46 @@
     background-color: #14cdc8;
     transform: translateY(2px);
 }
-.ext_loveplaza_formula{
+
+.ext_loveplaza_formula {
     padding-bottom: 15px;
 }
-.ext_loveplaza_progress_div{
-    padding: 10px;
-    padding-left: 0px;
-    z-index: 1;
+
+.ext_loveplaza_progress_div {
+    padding: 10px 30px 10px 0px;
 }
 
-.ext_loveplaza_progress_container{
+.ext_loveplaza_progress_container {
     border-radius: 25px;
     background: #eee;
     z-index: 1;
 }
 
-.ext_loveplaza_progress_bar{
+.ext_loveplaza_progress_bar {
     z-index: 1;
     width: var(--progress);
     height: 15px;
-    border-radius: 25px 0 0 25px;
+    border-radius: 25px;
     background: #0f0;
     transition: width .2s;
-    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
 }
-.ext_loveplaza_copyright{
+
+.ext_loveplaza_copyright {
     font-size: small;
-    color:#8c8c8c;
+    color: #8c8c8c;
 }
-.ext_loveplaza_maltese{
-    width: var(--progress);
+
+.ext_loveplaza_maltese {
+    left: var(--step);
     z-index: 2;
+    top: -40px;
+    max-width: 60px;
+    position: relative;
+    transition: left .2s;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
 }
+
 .ext_recommend_text {
     padding: 12px;
     color: #37cdbe;
@@ -105,7 +121,7 @@
     color: #cc1d1d;
 }
 
-.ext_editmode_btn_plus{
+.ext_editmode_btn_plus {
     font-size: 18px;
     padding-inline: 16px;
     padding-block: 6px;
@@ -121,7 +137,7 @@
     border-radius: 15px;
 }
 
-.ext_editmode_btn_minus{
+.ext_editmode_btn_minus {
     font-size: 18px;
     padding-inline: 16px;
     padding-block: 6px;
@@ -137,11 +153,11 @@
     border-radius: 15px;
 }
 
-.ext_editmode_container{
+.ext_editmode_container {
     margin-left: 75px;
 }
 
-.ext_recommend_div{
+.ext_recommend_div {
     background-color: #fff;
     font-size: 18px;
     padding-left: 28px;
