@@ -20,10 +20,9 @@ function showButton() {
     button.onclick = onButtonClick
 }
 function onButtonClick() {
-    document.getElementsByClassName("ext_loveplaza_button")[0].remove()
     cleanupLayout()
     $("div.hierarchy")[0].setAttribute("style", "display: flex; justift-content: space-around; ")
-    var parent=$("div.hierarchy")[0].children[0]
+    var parent = $("div.hierarchy")[0].children[0]
     var image = createElementEx("img", "ext_loveplaza_img", $("div.hierarchy")[0])
     image.setAttribute("src", chrome.runtime.getURL("images/loveplaza_pt0.png"))
     var fontStyle = createElementEx("style", "ext_loveplaza_font", parent)
@@ -37,40 +36,65 @@ function onButtonClick() {
         "<mo> + </mo>  <mn> 0.9 </mn>  <msqrt>    <mn> 9 </mn>    <mo> - </mo>    <msup><mrow><mi> x </mi></mrow><mrow><mn> 2 </mn></mrow>    </msup>  </msqrt>  " +
         "<mi> sin </mi>  <mrow>    <mo> ( </mo><mfrac><mrow>  <mn class='ext_loveplaza_score'> 0 </mn></mrow><mrow>  <mi style='padding-block: 2px;'> &#x03C0;  </mi></mrow></mfrac><mi> x </mi>    <mo> ) </mo>  </mrow></math>"
     var progressDiv = createElementEx("div", "ext_loveplaza_progress_div", parent)
-    var progressContainer=createElementEx("div", "ext_loveplaza_progress_container",progressDiv)
+    var progressContainer = createElementEx("div", "ext_loveplaza_progress_container", progressDiv)
     var progressBar = createElementEx("div", "ext_loveplaza_progress_bar", progressContainer)
     progressBar.setAttribute("style", "--progress: 0%;")
-    var maltese=createElementEx("img","ext_loveplaza_maltese",progressDiv)
-    maltese.setAttribute("src",chrome.runtime.getURL("images/loveplaza_maltese.png"))
-    maltese.setAttribute("style","--step:-7%")
-    var copyright=createElementEx("span","ext_loveplaza_copyright",parent)
-    copyright.textContent="Illustration from © MALTESE, Designed by LovePlaza 2024, RC."
-    setTimeout(onAnimatedFrame,1000,0,5)
+    var maltese = createElementEx("img", "ext_loveplaza_maltese", progressDiv)
+    maltese.setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese.png"))
+    maltese.setAttribute("style", "--step: -7%")
+    var copyright = createElementEx("span", "ext_loveplaza_copyright", parent)
+    copyright.textContent = "Illustration from © MALTESE, Designed by LovePlaza 2024, RC."
+    setTimeout(onKeyAnimatedFrame, 1000, 0, 5)
 }
-function onAnimatedFrame(i, maxIndex) {
+function onKeyAnimatedFrame(i, maxIndex) {
+    const blueBasedStyle = "transition: left .2s, top .2s; " +
+        "transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1); " +
+        "z-index: 1; position: absolute; "
     var image = $(".ext_loveplaza_img")[0]
     var score = $(".ext_loveplaza_score")[0]
     var progerssBar = $(".ext_loveplaza_progress_bar")[0]
     var subject = $(".sub-item")[i]
-    console.log("onAnimatedFrame: "+(i+1).toString())
-    score.textContent=parseFloat(score.textContent)+parseFloat(subject.getElementsByClassName("blue")[0].textContent)
-    image.setAttribute("src",chrome.runtime.getURL("images/loveplaza_pt"+(i+1).toString()+".png"))
-    var step=((score.textContent/520)*100).toFixed(3)
-    progerssBar.setAttribute("style","--progress:"+step+"%;")
-    $(".ext_loveplaza_maltese")[0].setAttribute("style","--step:"+(step-7)+"%;")
-    if (i == maxIndex){
+    var blue = subject.getElementsByClassName("blue")[0]
+    console.log("onAnimatedFrame: " + (i + 1).toString())
+    console.log(score)
+    score.textContent = parseFloat(score.textContent) + parseFloat(blue.textContent)
+    image.setAttribute("src", chrome.runtime.getURL("images/loveplaza_pt" + (i + 1).toString() + ".png"))
+    blue.parentNode.appendChild(blue.cloneNode(true))
+    blue.setAttribute("style", blueBasedStyle +
+        "left: " + score.offsetLeft.toString() + "px; top: " + score.offsetTop.toString() + "px;")
+    var step = ((score.textContent / 520) * 100).toFixed(3)
+    progerssBar.setAttribute("style", "--progress:" + step + "%;")
+    $(".ext_loveplaza_maltese")[0].setAttribute("style", "--step:" + (step - 7) + "%;")
+    if (i == maxIndex) {
         onAnimateEnded()
         return
     }
     else
-        setTimeout(onAnimatedFrame,1000,i+1,maxIndex)
+        setTimeout(onKeyAnimatedFrame, 1000, i + 1, maxIndex)
 }
-function onAnimateEnded(){
+function onTransitionAnimatedFrame() {
+
+}
+function onAnimateEnded() {
 
 }
 function cleanupLayout() {
+    $(".ext_loveplaza_button")[0].remove()
     $(".single")[0].setAttribute("style", "max-width: 488px; ")
     $(".general")[0].setAttribute("style", "border-bottom: revert; max-width:488px; ")
+    const blueBasedStyle = "transition: left .2s, top .2s; " +
+        "transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1); " +
+        "z-index: 1; position: absolute; "
+    for (const iterator of $("ext_classrank")) {
+        iterator.remove()
+    }
+    for (const iterator of $(".blue")) {
+        iterator.setAttribute("style", blueBasedStyle +
+            "left: " + iterator.offsetLeft.toString() + "px; top: " + iterator.offsetTop.toString() + "px;")
+    }
+    for (const iterator of $("span.specific")) {
+        iterator.setAttribute("style", "margin-left: 34px;")
+    }
     var subjectItems = $("div.sub-item")
     for (let index = 0; index < subjectItems.length; index++) {
         const element = subjectItems[index];

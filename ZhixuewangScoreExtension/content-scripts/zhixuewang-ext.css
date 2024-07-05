@@ -30,6 +30,9 @@
 
 .ext_loveplaza_score {
     padding-block: 2px;
+    font-weight: 1000;
+    font-family: initial;
+    font-size: large;
 }
 
 .ext_loveplaza_button {
