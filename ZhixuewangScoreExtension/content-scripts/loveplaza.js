@@ -59,9 +59,12 @@ function onKeyAnimatedFrame(i, maxIndex) {
     console.log(score)
     score.textContent = parseFloat(score.textContent) + parseFloat(blue.textContent)
     image.setAttribute("src", chrome.runtime.getURL("images/loveplaza_pt" + (i + 1).toString() + ".png"))
-    blue.parentNode.appendChild(blue.cloneNode(true))
+    blue.parentNode.prepend(blue.cloneNode(true))
     blue.setAttribute("style", blueBasedStyle +
-        "left: " + score.offsetLeft.toString() + "px; top: " + score.offsetTop.toString() + "px;")
+        "left: " + score.getBoundingClientRect().left.toString() + "px; top: " + (score.getBoundingClientRect().top.toString()-230) + "px;")
+    setTimeout(function(){
+        blue.remove()
+    },200)
     var step = ((score.textContent / 520) * 100).toFixed(3)
     progerssBar.setAttribute("style", "--progress:" + step + "%;")
     $(".ext_loveplaza_maltese")[0].setAttribute("style", "--step:" + (step - 7) + "%;")
@@ -89,8 +92,9 @@ function cleanupLayout() {
         iterator.remove()
     }
     for (const iterator of $(".blue")) {
+        iterator.setAttribute("style", blueBasedStyle+"left: auto; top: auto;")
         iterator.setAttribute("style", blueBasedStyle +
-            "left: " + iterator.offsetLeft.toString() + "px; top: " + iterator.offsetTop.toString() + "px;")
+            "left: " + (iterator.offsetLeft.toString()-80) + "px; top: " + iterator.offsetTop.toString() + "px;")
     }
     for (const iterator of $("span.specific")) {
         iterator.setAttribute("style", "margin-left: 34px;")
