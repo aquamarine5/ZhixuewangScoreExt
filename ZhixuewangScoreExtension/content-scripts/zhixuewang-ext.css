@@ -80,7 +80,7 @@
     height: 15px;
     border-radius: 25px;
     background: #fde1ed;
-    transition: width .2s;
+    transition: width .5s;
     transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
 }
 
@@ -95,7 +95,7 @@
     top: -40px;
     max-width: 60px;
     position: relative;
-    transition: left .2s;
+    transition: left .5s;
     transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
 }
 

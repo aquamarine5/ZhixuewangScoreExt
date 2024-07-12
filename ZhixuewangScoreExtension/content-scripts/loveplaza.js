@@ -47,7 +47,7 @@ function onButtonClick() {
     setTimeout(onKeyAnimatedFrame, 1000, 0, 5)
 }
 function onKeyAnimatedFrame(i, maxIndex) {
-    const blueBasedStyle = "transition: left .2s, top .2s; " +
+    const blueBasedStyle = "transition: left .5s, top .5s; font-size .5s" +
         "transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1); " +
         "z-index: 1; position: absolute; "
     var image = $(".ext_loveplaza_img")[0]
@@ -61,7 +61,8 @@ function onKeyAnimatedFrame(i, maxIndex) {
     image.setAttribute("src", chrome.runtime.getURL("images/loveplaza_pt" + (i + 1).toString() + ".png"))
     blue.parentNode.prepend(blue.cloneNode(true))
     blue.setAttribute("style", blueBasedStyle +
-        "left: " + score.getBoundingClientRect().left.toString() + "px; top: " + (score.getBoundingClientRect().top.toString()-230) + "px;")
+        "left: " + score.getBoundingClientRect().left.toString() + "px; top: " + (score.getBoundingClientRect().top.toString()-230) + "px; "+
+        "font-size: 26px; ")
     setTimeout(function(){
         blue.remove()
     },200)
@@ -85,7 +86,8 @@ function cleanupLayout() {
     $(".ext_loveplaza_button")[0].remove()
     $(".single")[0].setAttribute("style", "max-width: 488px; ")
     $(".general")[0].setAttribute("style", "border-bottom: revert; max-width:488px; ")
-    const blueBasedStyle = "transition: left .2s, top .2s; " +
+    $(".ext_recommend_notice_div")[0].remove()
+    const blueBasedStyle = "transition: left .5s, top .5s, font-size .5s; " +
         "transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1); " +
         "z-index: 1; position: absolute; "
     for (const iterator of $("ext_classrank")) {
