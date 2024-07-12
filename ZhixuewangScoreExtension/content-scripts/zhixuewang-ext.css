@@ -170,6 +170,7 @@
 }
 
 .ext_recommend_notice_container {
+    display: flex;
     border-radius: 15px;
     box-shadow: 0 1px 2px 0 rgba(101, 129, 156, .08);
     background: #e3e4e6;
@@ -189,4 +190,25 @@
 
 .ext_recommend_notice_div {
     padding: 12px;
+}
+
+.ext_recommend_notice_btn {
+    margin-left: auto;
+    padding-right: 20px;
+}
+
+.ext_recommend_notice_btn_img {
+    max-width: 35px;
+    max-height: 35px;
+}
+
+.ext_loveplaza_start_btn{
+    position: relative;
+    padding-left: 20px;
+    top: 10px;
+}
+
+.ext_loveplaza_start_img{
+    max-width: 88px;
+    max-height: 88px;
 }

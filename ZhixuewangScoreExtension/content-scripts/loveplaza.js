@@ -14,9 +14,10 @@ function checkButtonDisplayBuiltin() {
 }
 function showButton() {
     $(".general span.specific")[0].remove()
-    $("span.bold")[0].setAttribute("style", "margin-right: revert;")
-    var button = createElementEx("div", "ext_loveplaza_button", $("span.bold")[0])
-    button.textContent = "❤️🎉"
+    $("span.bold")[0].setAttribute("style", "margin-right: revert; display: ruby; ")
+    var button = createElementEx("div", "ext_loveplaza_start_btn", $("span.bold")[0])
+    var img=createElementEx("img","ext_loveplaza_start_img",button)
+    img.setAttribute("src",chrome.runtime.getURL("images/maltese_start.png"))
     button.onclick = onButtonClick
 }
 function onButtonClick() {
@@ -67,7 +68,7 @@ function onKeyAnimatedFrame(i, maxIndex) {
         "px; top: " + (score.getBoundingClientRect().top.toString() - 230) + "px; " +
         "font-size: 26px; opacity: 0; ")
     setTimeout(function () {
-        //blue.remove()
+        blue.remove()
     }, 500)
     var step = ((score.textContent / 520) * 100).toFixed(3)
     progerssBar.setAttribute("style", "--progress:" + step + "%;")
@@ -86,10 +87,11 @@ function onAnimateEnded() {
 
 }
 function cleanupLayout() {
-    $(".ext_loveplaza_button")[0].remove()
+    $(".ext_loveplaza_start_btn")[0].remove()
     $(".single")[0].setAttribute("style", "max-width: 488px; ")
     $(".general")[0].setAttribute("style", "border-bottom: revert; max-width:488px; ")
-    $(".ext_recommend_notice_div")[0].remove()
+    if($(".ext_recommend_notice_div").length!=0) 
+        $(".ext_recommend_notice_div")[0].remove()
     const blueBasedStyle = "transition: left .5s cubic-bezier(0.23, 1, 0.320, 1), top .5s cubic-bezier(0.23, 1, 0.320, 1), "+
         "font-size .5s cubic-bezier(0.23, 1, 0.320, 1),opacity .5s cubic-bezier(0.95, 0.31, 0.67, 0.21); " +
         "z-index: 1; position: absolute; opacity: 1; "

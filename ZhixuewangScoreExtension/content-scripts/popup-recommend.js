@@ -57,12 +57,23 @@ function execPopupRecommend() {
         github_repo.setAttribute("href", "https://github.com/aquamarine5/ZhixuewangScoreExt")
         github_repo.setAttribute("target", "_blank")
         github_repo.innerText = "Github 项目地址"
-        var notice_div=createElementEx("div","ext_recommend_notice_div",recommend_div)
-        var notice_container=createElementEx("div","ext_recommend_notice_container",notice_div)
-        var notice_img=createElementEx("img","ext_recommend_notice_img",notice_container)
-        notice_img.setAttribute("src",chrome.runtime.getURL("images/tips.png"))
-        var notice_text=createElementEx("span","ext_recommend_notice_text",notice_container)
-        notice_text.textContent="作者已经高考结束不再使用智学网，未来可能不会在继续对插件进行新功能更新    2021.12.18 → 2024.07.02"
+        if(window.location.href.match("ext_no_notice")==null){
+            var notice_div=createElementEx("div","ext_recommend_notice_div",recommend_div)
+            var notice_container=createElementEx("div","ext_recommend_notice_container",notice_div)
+            var notice_img=createElementEx("img","ext_recommend_notice_img",notice_container)
+            notice_img.setAttribute("src",chrome.runtime.getURL("images/tips_notice.png"))
+            var notice_text=createElementEx("span","ext_recommend_notice_text",notice_container)
+            notice_text.textContent="作者已经高考结束不再使用智学网，未来可能不会在继续对插件进行新功能更新    2021.12.18 → 2024.07.12"
+            var notice_btn=createElementEx("div","ext_recommend_notice_btn",notice_container)
+            var notice_btn_img=createElementEx("img","ext_recommend_notice_btn_img",notice_btn)
+            notice_btn_img.setAttribute("src",chrome.runtime.getURL("images/tips_close.png"))
+            notice_btn.onclick=function(){
+                if(notice_div!=null){
+                    notice_div.remove()
+                    notice_div=null
+                }
+            }
+        }
         var dropdownlist = $(".el-select-dropdown__list li")
         for (let index = 0; index < dropdownlist.length; index++) {
             const element = dropdownlist[index];
