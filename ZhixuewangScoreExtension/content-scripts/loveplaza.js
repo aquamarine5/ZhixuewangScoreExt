@@ -17,12 +17,12 @@ function showButton() {
     $("span.bold")[0].setAttribute("style", "margin-right: revert; display: ruby; ")
     var button = createElementEx("div", "ext_loveplaza_start_btn", $("span.bold")[0])
     var img=createElementEx("img","ext_loveplaza_start_img",button)
-    img.setAttribute("src",chrome.runtime.getURL("images/maltese_start.png"))
+    img.setAttribute("src",chrome.runtime.getURL("images/loveplaza_maltese_start.png"))
     button.onclick = onButtonClick
 }
 function onButtonClick() {
     cleanupLayout()
-    $("div.hierarchy")[0].setAttribute("style", "display: flex; justift-content: space-around; ")
+    $("div.hierarchy")[0].setAttribute("style", "display: flex; justify-content: space-around; ")
     var parent = $("div.hierarchy")[0].children[0]
     var image = createElementEx("img", "ext_loveplaza_img", $("div.hierarchy")[0])
     image.setAttribute("src", chrome.runtime.getURL("images/loveplaza_pt0.png"))
@@ -41,10 +41,11 @@ function onButtonClick() {
     var progressBar = createElementEx("div", "ext_loveplaza_progress_bar", progressContainer)
     progressBar.setAttribute("style", "--progress: 0%;")
     var maltese = createElementEx("img", "ext_loveplaza_maltese", progressDiv)
-    maltese.setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese.png"))
+    maltese.setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese_sidebar.png"))
     maltese.setAttribute("style", "--step: -7%")
     var copyright = createElementEx("span", "ext_loveplaza_copyright", parent)
-    copyright.textContent = "Illustration from © MALTESE, Designed by LovePlaza 2024, RC."
+    copyright.innerHTML = "Illustration from © MALTESE.<br />"+
+        "Designed by LovePlaza 2024, @aquamarine5, @海蓝色的咕咕鸽, RC."
     setTimeout(onKeyAnimatedFrame, 1000, 0, 5)
 }
 function onKeyAnimatedFrame(i, maxIndex) {
@@ -80,11 +81,12 @@ function onKeyAnimatedFrame(i, maxIndex) {
     else
         setTimeout(onKeyAnimatedFrame, 1000, i + 1, maxIndex)
 }
-function onTransitionAnimatedFrame() {
-
-}
 function onAnimateEnded() {
-
+    var finalImg=createElementEx("img","ext_loveplaza_final_img",$("div.hierarchy")[0])
+    finalImg.setAttribute("src",chrome.runtime.getURL("images/loveplaza_maltese_final.png"))
+    setTimeout(function(){
+        finalImg.setAttribute("style","opacity: 1;")
+    },450)
 }
 function cleanupLayout() {
     $(".ext_loveplaza_start_btn")[0].remove()

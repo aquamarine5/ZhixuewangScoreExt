@@ -212,3 +212,12 @@
     max-width: 88px;
     max-height: 88px;
 }
+
+.ext_loveplaza_final_img{
+    position: absolute;    
+    top: -17px;
+    left: 596px;
+    opacity: 0;
+    transition: opacity .5s;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
