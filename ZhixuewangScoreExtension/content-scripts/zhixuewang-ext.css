@@ -29,6 +29,8 @@
 }
 
 .ext_loveplaza_score {
+    position: relative;
+    z-index: 2;
     padding-block: 2px;
     font-weight: 1000;
     font-family: initial;

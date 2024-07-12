@@ -47,8 +47,8 @@ function onButtonClick() {
     setTimeout(onKeyAnimatedFrame, 1000, 0, 5)
 }
 function onKeyAnimatedFrame(i, maxIndex) {
-    const blueBasedStyle = "transition: left .5s, top .5s; font-size .5s" +
-        "transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1); " +
+    const blueBasedStyle = "transition: left .5s cubic-bezier(0.23, 1, 0.320, 1), top .5s cubic-bezier(0.23, 1, 0.320, 1), "+
+        "font-size .5s cubic-bezier(0.23, 1, 0.320, 1),opacity .5s cubic-bezier(0.95, 0.31, 0.67, 0.21); " +
         "z-index: 1; position: absolute; "
     var image = $(".ext_loveplaza_img")[0]
     var score = $(".ext_loveplaza_score")[0]
@@ -59,13 +59,16 @@ function onKeyAnimatedFrame(i, maxIndex) {
     console.log(score)
     score.textContent = parseFloat(score.textContent) + parseFloat(blue.textContent)
     image.setAttribute("src", chrome.runtime.getURL("images/loveplaza_pt" + (i + 1).toString() + ".png"))
-    blue.parentNode.prepend(blue.cloneNode(true))
+    var clonedDiv = blue.cloneNode(true)
+    clonedDiv.setAttribute("id", "ext_loveplaza_cloned")
+    blue.parentNode.prepend(clonedDiv)
     blue.setAttribute("style", blueBasedStyle +
-        "left: " + score.getBoundingClientRect().left.toString() + "px; top: " + (score.getBoundingClientRect().top.toString()-230) + "px; "+
-        "font-size: 26px; ")
-    setTimeout(function(){
-        blue.remove()
-    },200)
+        "left: " + (score.getBoundingClientRect().left - 20).toString() +
+        "px; top: " + (score.getBoundingClientRect().top.toString() - 230) + "px; " +
+        "font-size: 26px; opacity: 0; ")
+    setTimeout(function () {
+        //blue.remove()
+    }, 500)
     var step = ((score.textContent / 520) * 100).toFixed(3)
     progerssBar.setAttribute("style", "--progress:" + step + "%;")
     $(".ext_loveplaza_maltese")[0].setAttribute("style", "--step:" + (step - 7) + "%;")
@@ -87,16 +90,17 @@ function cleanupLayout() {
     $(".single")[0].setAttribute("style", "max-width: 488px; ")
     $(".general")[0].setAttribute("style", "border-bottom: revert; max-width:488px; ")
     $(".ext_recommend_notice_div")[0].remove()
-    const blueBasedStyle = "transition: left .5s, top .5s, font-size .5s; " +
-        "transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1); " +
-        "z-index: 1; position: absolute; "
+    const blueBasedStyle = "transition: left .5s cubic-bezier(0.23, 1, 0.320, 1), top .5s cubic-bezier(0.23, 1, 0.320, 1), "+
+        "font-size .5s cubic-bezier(0.23, 1, 0.320, 1),opacity .5s cubic-bezier(0.95, 0.31, 0.67, 0.21); " +
+        "z-index: 1; position: absolute; opacity: 1; "
     for (const iterator of $("ext_classrank")) {
         iterator.remove()
     }
     for (const iterator of $(".blue")) {
-        iterator.setAttribute("style", blueBasedStyle+"left: auto; top: auto;")
+        iterator.setAttribute("style", blueBasedStyle + "left: auto; top: auto;")
         iterator.setAttribute("style", blueBasedStyle +
-            "left: " + (iterator.offsetLeft.toString()-80) + "px; top: " + iterator.offsetTop.toString() + "px;")
+            "left: " + (iterator.offsetLeft.toString() - 80) +
+            "px; top: " + iterator.offsetTop.toString() + "px;")
     }
     for (const iterator of $("span.specific")) {
         iterator.setAttribute("style", "margin-left: 34px;")
