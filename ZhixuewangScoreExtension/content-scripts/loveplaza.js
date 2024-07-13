@@ -88,7 +88,7 @@ function onAnimateStarted() {
     tiktok_img.setAttribute("src", chrome.runtime.getURL("images/loveplaza_tiktok.png"))
     tiktok_div.onclick = function () {
         if (document.ext_plaza_playend != undefined)
-            window.open("https://www.douyin.com/user/MS4wLjABAAAApuyqymIaQkpvKkbdH1X6W3A6XEgJl7kddGrZHxipJ7TbA1lCRaPJK5gZ1KX7pR1n")
+            window.open("https://www.douyin.com/video/7391103340022631731")
     }
     setTimeout(onKeyAnimatedFrame, 1000, 0, 5)
 }
