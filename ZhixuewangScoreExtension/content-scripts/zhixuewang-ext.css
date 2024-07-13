@@ -159,6 +159,7 @@
 }
 
 .ext_editmode_container {
+    padding-top: 5px;
     margin-left: 75px;
 }
 
@@ -217,7 +218,7 @@
     top: -17px;
     left: 596px;
     opacity: 0;
-    transition: opacity .7s;
+    transition: opacity .9s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
@@ -235,7 +236,7 @@
 .ext_loveplaza_final_btn{
     padding-right: 10px;
     opacity: 0;
-    transition: opacity .3s;
+    transition: opacity .5s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 

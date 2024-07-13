@@ -24,6 +24,12 @@ function setupInterval() {
 function execPopupRecommend() {
     if (checkAllScorePublished()) {
         document.ext_functions_plaza()
+        if(window.location.href.match("ext_hide_username")!=null)
+            setTimeout(function(){
+                document.getElementById("userName").textContent="海蓝色的咕咕鸽"
+            },500)
+        
+            
         var parent_div = document.getElementsByClassName("hierarchy")[0]
         var recommend_div = document.createElement("div")
         recommend_div.className = "ext_recommend_div"
@@ -84,12 +90,24 @@ function execPopupRecommend() {
         }
     }
 }
+function onEditmodeButtonClicked(){
+    const obj=event.currentTarget
+    console.log(this)
+    var score=parseFloat(obj.getAttribute("score"))
+    var subjectScore=obj.parentNode.parentNode.getElementsByClassName('blue')[0]
+    subjectScore.textContent=parseFloat(subjectScore.textContent)+score
+    var totalScore=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0]
+    totalScore.textContent=parseFloat(totalScore.textContent)+score
+    document.ext_functions_plaza()
+}
 function editModeButton() {
     if (document.ext_editmode == undefined) document.ext_editmode = false
-    function createButtonEx2(tagName, className, parent_div, onClick, textContent) {
+    function createButtonEx2(tagName, className, parent_div, score, textContent,subjectIndex) {
         var item = createElementEx(tagName, className, parent_div)
-        item.setAttribute("onclick", onClick)
+        item.setAttribute("score", score)
+        item.setAttribute("subjectIndex",subjectIndex)
         item.textContent = textContent
+        item.onclick=onEditmodeButtonClicked
         return item
     }
     var editmodeButton = document.getElementById("ext_btn_editmode")
@@ -100,13 +118,12 @@ function editModeButton() {
             const element = subjectItems[index];
             var container = createElementEx("div", "ext_editmode_container", element)
 
-            var onclickCommand = "var s=this.parentNode.parentNode.getElementsByClassName('blue')[0];s.textContent=parseFloat(s.textContent)%%;var g=document.getElementsByClassName('general')[0].getElementsByClassName('increase')[0];g.textContent=parseFloat(g.textContent)%%;document.ext_functions_plaza()"
-            createButtonEx2("div", "ext_editmode_btn_minus", container, onclickCommand.replace(/%%/g, "-5"), "-5")
-            createButtonEx2("div", "ext_editmode_btn_minus", container, onclickCommand.replace(/%%/g, "-1"), "-1")
+            createButtonEx2("div", "ext_editmode_btn_minus", container, "-5", "-5",index.toString())
+            createButtonEx2("div", "ext_editmode_btn_minus", container, "-1", "-1",index.toString())
 
-            createButtonEx2("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+0.5"), "+0.5")
-            createButtonEx2("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+1"), "+1")
-            createButtonEx2("div", "ext_editmode_btn_plus", container, onclickCommand.replace(/%%/g, "+5"), "+5")
+            createButtonEx2("div", "ext_editmode_btn_plus", container, "0.5", "+0.5",index.toString())
+            createButtonEx2("div", "ext_editmode_btn_plus", container, "1", "+1",index.toString())
+            createButtonEx2("div", "ext_editmode_btn_plus", container, "5", "+5",index.toString())
         }
     } else {
         editmodeButton.textContent = "进入编辑分数模式"

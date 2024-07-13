@@ -4,28 +4,32 @@ function checkScore(s) {
 function checkButtonDisplay(s) {
     if (checkScore(s)) showButton()
     else {
-        var elements = document.getElementsByClassName("ext_loveplaza_button")
+        $(".general span.specific")[0].setAttribute("style", "display: initial; ")
+        var elements = document.getElementsByClassName("ext_loveplaza_start_btn")
         if (elements.length > 0)
-            document.getElementsByClassName("ext_loveplaza_button")[0].remove()
+            document.getElementsByClassName("ext_loveplaza_start_btn")[0].remove()
     }
 }
 function checkButtonDisplayBuiltin() {
     checkButtonDisplay(parseInt($(".general span.increase")[0].textContent))
 }
 function showButton() {
-    $(".general span.specific")[0].remove()
+    if ($(".ext_loveplaza_start_btn").length != 0)
+        return
+    if ($(".general span.specific").length != 0)
+        $(".general span.specific")[0].setAttribute("style", "display: none; ")
     $("span.bold")[0].setAttribute("style", "margin-right: revert; display: ruby; ")
     var button = createElementEx("div", "ext_loveplaza_start_btn", $("span.bold")[0])
     var img = createElementEx("img", "ext_loveplaza_start_img", button)
     img.setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese_start.png"))
     button.onclick = onButtonClick
 }
-function feedback(){
-    var http=new XMLHttpRequest()
-    http.open("GET","https://api.visitorbadge.io/api/visitors?path=loveplaza_zhixueExt")
+function feedback() {
+    var http = new XMLHttpRequest()
+    http.open("GET", "https://api.visitorbadge.io/api/visitors?path=loveplaza_zhixueExt")
     http.send()
-    http.onreadystatechange= function(ev){
-        if(ev.currentTarget.status = 200 && ev.currentTarget.readyState == 4){
+    http.onreadystatechange = function (ev) {
+        if (ev.currentTarget.status = 200 && ev.currentTarget.readyState == 4) {
             console.log("feedback success!")
         }
     }
@@ -133,7 +137,11 @@ function onAnimateEnded() {
     }
 }
 function cleanupLayout() {
-    $(".ext_recommend_div")[0].remove()
+    if ($(".ext_recommend_div").length != 0)
+        $(".ext_recommend_div")[0].remove()
+    for (const iterator of $(".ext_editmode_container")) {
+        iterator.remove()
+    }
     $(".ext_loveplaza_start_btn")[0].remove()
     $(".single")[0].setAttribute("style", "max-width: 488px; ")
     $(".general")[0].setAttribute("style", "border-bottom: revert; max-width:488px; ")
@@ -142,7 +150,7 @@ function cleanupLayout() {
     const blueBasedStyle = "transition: left .5s cubic-bezier(0.23, 1, 0.320, 1), top .5s cubic-bezier(0.23, 1, 0.320, 1), " +
         "font-size .5s cubic-bezier(0.23, 1, 0.320, 1),opacity .5s cubic-bezier(0.95, 0.31, 0.67, 0.21); " +
         "z-index: 1; position: absolute; opacity: 1; "
-    for (const iterator of $("ext_classrank")) {
+    for (const iterator of $(".ext_classrank")) {
         iterator.remove()
     }
     for (const iterator of $(".blue")) {
@@ -151,8 +159,14 @@ function cleanupLayout() {
             "left: " + (iterator.offsetLeft.toString() - 80) +
             "px; top: " + iterator.offsetTop.toString() + "px;")
     }
-    for (const iterator of $("span.specific")) {
-        iterator.setAttribute("style", "margin-left: 34px;")
+    for (const iterator of $(".single span.specific")) {
+        var score = iterator.parentNode.getElementsByClassName("blue")[0].textContent
+        var margin = 40
+        if (score.length == 2) margin = 40
+        else if (score.length == 3) margin = 47
+        else if (score.length == 4) margin = 45
+        else if (score.length == 5) margin = 54
+        iterator.setAttribute("style", "margin-left: " + margin.toString() + "px;")
     }
     var subjectItems = $("div.sub-item")
     for (let index = 0; index < subjectItems.length; index++) {
@@ -164,6 +178,7 @@ function cleanupLayout() {
         const element = subjectItems[index];
         element.setAttribute("style", "width: revert;")
     }
+
 }
 
 function createElementEx(tagName, className, parent) {
