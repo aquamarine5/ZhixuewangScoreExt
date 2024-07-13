@@ -218,6 +218,29 @@
     top: -17px;
     left: 596px;
     opacity: 0;
-    transition: opacity .5s;
+    transition: opacity .7s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.ext_loveplaza_final_fg{
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.ext_loveplaza_final_container{
+    display: flex;
+    align-items: center;
+    padding-block: 10px;
+}
+
+.ext_loveplaza_final_btn{
+    padding-right: 10px;
+    opacity: 0;
+    transition: opacity .3s;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.ext_loveplaza_logo{
+    max-height: 35px;
+    padding-right: 20px;
 }

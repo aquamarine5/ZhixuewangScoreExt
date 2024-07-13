@@ -16,13 +16,14 @@ function showButton() {
     $(".general span.specific")[0].remove()
     $("span.bold")[0].setAttribute("style", "margin-right: revert; display: ruby; ")
     var button = createElementEx("div", "ext_loveplaza_start_btn", $("span.bold")[0])
-    var img=createElementEx("img","ext_loveplaza_start_img",button)
-    img.setAttribute("src",chrome.runtime.getURL("images/loveplaza_maltese_start.png"))
+    var img = createElementEx("img", "ext_loveplaza_start_img", button)
+    img.setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese_start.png"))
     button.onclick = onButtonClick
 }
 function onButtonClick() {
     cleanupLayout()
-    $("div.hierarchy")[0].setAttribute("style", "display: flex; justify-content: space-around; ")
+    $("div.hierarchy")[0].setAttribute("style",
+        "display: flex; justify-content: space-around; padding-bottom: 20px; ")
     var parent = $("div.hierarchy")[0].children[0]
     var image = createElementEx("img", "ext_loveplaza_img", $("div.hierarchy")[0])
     image.setAttribute("src", chrome.runtime.getURL("images/loveplaza_pt0.png"))
@@ -44,12 +45,29 @@ function onButtonClick() {
     maltese.setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese_sidebar.png"))
     maltese.setAttribute("style", "--step: -7%")
     var copyright = createElementEx("span", "ext_loveplaza_copyright", parent)
-    copyright.innerHTML = "Illustration from © MALTESE.<br />"+
+    copyright.innerHTML = "Illustration from © MALTESE.<br />" +
         "Designed by LovePlaza 2024, @aquamarine5, @海蓝色的咕咕鸽, RC."
+    var final = createElementEx("div", "ext_loveplaza_final_container", parent)
+    var loveplaza_img = createElementEx("img", "ext_loveplaza_logo", final)
+    loveplaza_img.setAttribute("src", chrome.runtime.getURL("images/loveplaza_logo.png"))
+    var replay_div = createElementEx("div", "ext_loveplaza_final_btn", final)
+    var replay_img = createElementEx("img", "ext_loveplaza_final_fg", replay_div)
+    replay_img.setAttribute("src", chrome.runtime.getURL("images/loveplaza_replay.png"))
+    replay_div.onclick = function () {
+        if (document.ext_plaza_playend != undefined)
+            history.go(0)
+    }
+    var tiktok_div = createElementEx("div", "ext_loveplaza_final_btn", final)
+    var tiktok_img = createElementEx("img", "ext_loveplaza_final_fg", tiktok_div)
+    tiktok_img.setAttribute("src", chrome.runtime.getURL("images/loveplaza_tiktok.png"))
+    tiktok_div.onclick = function () {
+        if (document.ext_plaza_playend != undefined)
+            window.open("https://www.douyin.com/user/MS4wLjABAAAApuyqymIaQkpvKkbdH1X6W3A6XEgJl7kddGrZHxipJ7TbA1lCRaPJK5gZ1KX7pR1n")
+    }
     setTimeout(onKeyAnimatedFrame, 1000, 0, 5)
 }
 function onKeyAnimatedFrame(i, maxIndex) {
-    const blueBasedStyle = "transition: left .5s cubic-bezier(0.23, 1, 0.320, 1), top .5s cubic-bezier(0.23, 1, 0.320, 1), "+
+    const blueBasedStyle = "transition: left .5s cubic-bezier(0.23, 1, 0.320, 1), top .5s cubic-bezier(0.23, 1, 0.320, 1), " +
         "font-size .5s cubic-bezier(0.23, 1, 0.320, 1),opacity .5s cubic-bezier(0.95, 0.31, 0.67, 0.21); " +
         "z-index: 1; position: absolute; "
     var image = $(".ext_loveplaza_img")[0]
@@ -82,19 +100,24 @@ function onKeyAnimatedFrame(i, maxIndex) {
         setTimeout(onKeyAnimatedFrame, 1000, i + 1, maxIndex)
 }
 function onAnimateEnded() {
-    var finalImg=createElementEx("img","ext_loveplaza_final_img",$("div.hierarchy")[0])
-    finalImg.setAttribute("src",chrome.runtime.getURL("images/loveplaza_maltese_final.png"))
-    setTimeout(function(){
-        finalImg.setAttribute("style","opacity: 1;")
-    },450)
+    document.ext_plaza_playend = true
+    var finalImg = createElementEx("img", "ext_loveplaza_final_img", $("div.hierarchy")[0])
+    finalImg.setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese_final.png"))
+    setTimeout(function () {
+        finalImg.setAttribute("style", "opacity: 1;")
+    }, 450)
+    for (const iterator of $(".ext_loveplaza_final_btn")) {
+        iterator.setAttribute("style", "opacity: 1; ")
+    }
 }
 function cleanupLayout() {
+    $(".ext_recommend_div")[0].remove()
     $(".ext_loveplaza_start_btn")[0].remove()
     $(".single")[0].setAttribute("style", "max-width: 488px; ")
     $(".general")[0].setAttribute("style", "border-bottom: revert; max-width:488px; ")
-    if($(".ext_recommend_notice_div").length!=0) 
+    if ($(".ext_recommend_notice_div").length != 0)
         $(".ext_recommend_notice_div")[0].remove()
-    const blueBasedStyle = "transition: left .5s cubic-bezier(0.23, 1, 0.320, 1), top .5s cubic-bezier(0.23, 1, 0.320, 1), "+
+    const blueBasedStyle = "transition: left .5s cubic-bezier(0.23, 1, 0.320, 1), top .5s cubic-bezier(0.23, 1, 0.320, 1), " +
         "font-size .5s cubic-bezier(0.23, 1, 0.320, 1),opacity .5s cubic-bezier(0.95, 0.31, 0.67, 0.21); " +
         "z-index: 1; position: absolute; opacity: 1; "
     for (const iterator of $("ext_classrank")) {
