@@ -20,6 +20,16 @@ function showButton() {
     img.setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese_start.png"))
     button.onclick = onButtonClick
 }
+function feedback(){
+    var http=new XMLHttpRequest()
+    http.open("GET","https://api.visitorbadge.io/api/visitors?path=loveplaza_zhixueExt")
+    http.send()
+    http.onreadystatechange= function(ev){
+        if(ev.currentTarget.status = 200 && ev.currentTarget.readyState == 4){
+            console.log("feedback success!")
+        }
+    }
+}
 function onButtonClick() {
     setTimeout(function () {
         $(".ext_loveplaza_start_img")[0].setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese_frame1.png"))
@@ -28,8 +38,9 @@ function onButtonClick() {
             setTimeout(function () {
                 onAnimateStarted()
             }, 500)
-        }, 500)
-    }, 500)
+        }, 700)
+    }, 100)
+    feedback()
 }
 function onAnimateStarted() {
     cleanupLayout()
