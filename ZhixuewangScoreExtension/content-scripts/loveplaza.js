@@ -21,6 +21,17 @@ function showButton() {
     button.onclick = onButtonClick
 }
 function onButtonClick() {
+    setTimeout(function () {
+        $(".ext_loveplaza_start_img")[0].setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese_frame1.png"))
+        setTimeout(function () {
+            $(".ext_loveplaza_start_img")[0].setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese_frame2.png"))
+            setTimeout(function () {
+                onAnimateStarted()
+            }, 500)
+        }, 500)
+    }, 500)
+}
+function onAnimateStarted() {
     cleanupLayout()
     $("div.hierarchy")[0].setAttribute("style",
         "display: flex; justify-content: space-around; padding-bottom: 20px; ")
@@ -45,7 +56,7 @@ function onButtonClick() {
     maltese.setAttribute("src", chrome.runtime.getURL("images/loveplaza_maltese_sidebar.png"))
     maltese.setAttribute("style", "--step: -7%")
     var copyright = createElementEx("span", "ext_loveplaza_copyright", parent)
-    copyright.innerHTML = "Illustration from © MALTESE.<br />" +
+    copyright.innerHTML = "Illustration from © MALTESE, @妘箖.<br />" +
         "Designed by LovePlaza 2024, @aquamarine5, @海蓝色的咕咕鸽, RC."
     var final = createElementEx("div", "ext_loveplaza_final_container", parent)
     var loveplaza_img = createElementEx("img", "ext_loveplaza_logo", final)
