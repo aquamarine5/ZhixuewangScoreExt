@@ -1,6 +1,6 @@
 {
   "name": "__MSG_PACKAGE_NAME__",
-  "version": "1.15",
+  "version": "1.16",
   "manifest_version": 3,
   "description": "用于在智学网成绩报告页面快速更改为满分的插件",
   "default_locale": "zh",
@@ -21,21 +21,23 @@
       ],
       "js": [
         "libs/jquery-3.6.0.min.js",
+        "content-scripts/loveplaza.js",
         "content-scripts/core.js",
         "content-scripts/popup-recommend.js"
       ],
       "css": [
-        "content-scripts/popup-recommend.css"
+        "content-scripts/zhixuewang-ext.css"
       ]
     }
   ],
   "web_accessible_resources": [
     {
       "resources": [
-        "/images/*.png"
+        "/images/*.png",
+        "/fonts/*.*"
       ],
       "matches": [
-        "<all_urls>"
+        "https://www.zhixue.com/*"
       ]
     }
   ]
