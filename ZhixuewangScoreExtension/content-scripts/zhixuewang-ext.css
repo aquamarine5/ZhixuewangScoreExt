@@ -173,24 +173,21 @@
 .ext_recommend_notice_container {
     display: flex;
     border-radius: 15px;
-    box-shadow: 0 1px 2px 0 rgba(101, 129, 156, .08);
-    background: #e3e4e6;
     display: flex;
     align-items: center;
 }
 
 .ext_recommend_notice_img {
-    max-width: 30px;
-    max-height: 30px;
-    margin: 15px 20px 15px 30px;
+    padding-right: 8px;
 }
 
 .ext_recommend_notice_text {
-    font-size: medium;
+    font-size: 12px;
+    color: gray;
 }
 
 .ext_recommend_notice_div {
-    padding: 12px;
+    padding: 3px 12px;
 }
 
 .ext_recommend_notice_btn {
@@ -203,18 +200,19 @@
     max-height: 35px;
 }
 
-.ext_loveplaza_start_btn{
+.ext_loveplaza_start_btn {
     position: relative;
     padding-left: 20px;
     top: 10px;
+    cursor: pointer;
 }
 
-.ext_loveplaza_start_img{
+.ext_loveplaza_start_img {
     max-height: 88px;
 }
 
-.ext_loveplaza_final_img{
-    position: absolute;    
+.ext_loveplaza_final_img {
+    position: absolute;
     top: -17px;
     left: 596px;
     opacity: 0;
@@ -222,25 +220,25 @@
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.ext_loveplaza_final_fg{
+.ext_loveplaza_final_fg {
     max-width: 30px;
     max-height: 30px;
 }
 
-.ext_loveplaza_final_container{
+.ext_loveplaza_final_container {
     display: flex;
     align-items: center;
     padding-block: 10px;
 }
 
-.ext_loveplaza_final_btn{
+.ext_loveplaza_final_btn {
     padding-right: 10px;
     opacity: 0;
     transition: opacity .5s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.ext_loveplaza_logo{
+.ext_loveplaza_logo {
     max-height: 35px;
     padding-right: 20px;
 }
