@@ -16,7 +16,7 @@
 
 - ZhixuewangScoreExt已经成功上架[Microsoft Edge Addons](https://microsoftedge.microsoft.com/addons/detail/zhixuewangscoreext/ppkbngflajmbfhdjeaiccfdjohldjhld)（即Edge扩展应用商店）！现在可以在Edge内直接接受安装和更新而无需下载*.crx或*.zip自己加载解压缩的扩展啦 😄🎉
 
-## 彩蛋如何触发？（v1.16 or later 可用）
+## 彩蛋如何触发？（v1.16+ 可用）
 
 - 当成绩总分在520或521分时会出现按钮，点击即可触发动画
 ![button](README_images/loveplaza_start.png)
@@ -33,7 +33,7 @@
 
 - 浏览[扩展发布页](https://microsoftedge.microsoft.com/addons/detail/zhixuewangscoreext/ppkbngflajmbfhdjeaiccfdjohldjhld)进行安装下载
 
-### 方法二（Chromium均可使用，就是麻烦）
+### <del>方法二（Chromium均可使用，就是麻烦）</del>（不再可用）
 
 - 从[**Releases**](https://github.com/aquamarine5/ZhixuewangScoreExt/releases)处下载最新插件的zip包
 - 解压，打开Edge ( edge://extensions/ ) 或Chrome ( chrome://extensions/ ) 扩展页面
