@@ -12,7 +12,7 @@
 
 > [!WARNING]
 > 作者已经上大学，不再使用智学网。如果你也上了大学用了学习通，可以去作者的新项目[**ChaoxingSignFaker (随地大小签)**](https://github.com/aquamarine5/ChaoxingSignFaker)。  
-> 目前此插件因为智学网页面更新，ui可能无法自动触发，同时_查看班级排名_功能已不可用（参见[#31](https://github.com/aquamarine5/ZhixuewangScoreExt/issues/31)）。一键满分、修改分数以及彩蛋仍可用。  
+> 目前此插件因为智学网页面更新，ui可能无法自动触发，同时`查看班级排名`功能已不可用（参见[#31](https://github.com/aquamarine5/ZhixuewangScoreExt/issues/31)）。一键满分、修改分数以及彩蛋仍可用。  
 > *2025/11/06, @aquamarine5.*
 
 - 用于在智学网成绩报告页面以及考试原卷页面快速更改为满分的插件
